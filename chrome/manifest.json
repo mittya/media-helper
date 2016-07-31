@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+
+  "name": "Instagram Save",
+  "description": "Save instagram image and video.",
+  "version": "1.0",
+
+  "icons": {
+    "512": "icons/icon_512.png",
+    "128": "icons/icon_512.png",
+    "112": "icons/icon_512.png",
+    "48": "icons/icon_512.png",
+    "32": "icons/icon_512.png"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["instagram.js"],
+      "css": ["instagram.css"],
+      "matches": ["https://www.instagram.com/*"]
+    }
+  ],
+
+  "permissions": [
+    "tabs",
+    "http://www.instagram.com/*",
+    "https://www.instagram.com/*"
+  ]
+}

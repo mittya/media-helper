@@ -1,0 +1,35 @@
+._ovg3g {
+  display: none !important;
+}
+
+.downloadLink {
+  position: absolute;
+  opacity: 0;
+  right: 20px;
+  top: 20px;
+  z-index: 2;
+  text-align: center;
+  font-size: 16px;
+  line-height: 29px;
+  padding: 0 11px;
+  font-weight: 600;
+  border-radius: 3px;
+  border: 1px solid #db2d74;
+  background-color: #db2d74;
+  color: #fff;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  transition: opacity .2s ease-out;
+  transition-delay: .1s;
+}
+
+.downloadLink:visited {
+  color: #fff;
+}
+
+._22yr2:hover .downloadLink,
+._ikcuh:hover .downloadLink {
+  opacity: 1;
+}
