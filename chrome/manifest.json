@@ -1,14 +1,13 @@
 {
   "manifest_version": 2,
 
-  "name": "Instagram Save",
-  "description": "Save instagram image and video.",
-  "version": "1.0",
+  "name": "Instagram Helper",
+  "description": "自动找到 Instagram 图片和视频的原文件，方便您保存。",
+  "version": "1.0.0",
 
   "icons": {
     "512": "icons/icon_512.png",
     "128": "icons/icon_512.png",
-    "112": "icons/icon_512.png",
     "48": "icons/icon_512.png",
     "32": "icons/icon_512.png"
   },

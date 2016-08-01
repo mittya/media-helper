@@ -1,5 +1,7 @@
 if (window.location.pathname.match('/p/')) {
 
+  // 详细页面
+
   var _parent, _href, _text;
 
   if (document.querySelectorAll('head meta[property="og:video"]')[0]) {
@@ -14,7 +16,34 @@ if (window.location.pathname.match('/p/')) {
 
   addBtn(_parent, _href, _text);
 
+} else if (window.location.pathname === '/') {
+
+  // 首页信息流页面
+
+  var _box = document.querySelector('._qj7yb');
+  var _parent, _href, _text;
+
+  _box.addEventListener('mouseover', function(event) {
+
+    if (event.target.className === '_icyx7') {
+      _parent = event.target.parentNode;
+      _href = event.target.src;
+      _text = '图片';
+
+      addBtn(_parent, _href, _text);
+    } else if (event.target.className === '_c2kdw') {
+      _parent = event.target.parentNode;
+      _href = _parent.querySelector('._c8hkj').src;
+      _text = '视频';
+
+      addBtn(_parent, _href, _text);
+    }
+
+  });
+
 } else {
+
+  // 个人页面弹窗详细页面
 
   addAriaListener('react-root', function() {
 
@@ -71,7 +100,6 @@ function addBtn(parent, href, text) {
 
   _link.addEventListener('click', function(e) {
     e.stopPropagation();
-    console.log('click');
   }, false);
 
   _parent.appendChild(_link);
