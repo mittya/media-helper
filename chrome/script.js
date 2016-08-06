@@ -1,107 +1,81 @@
-if (window.location.pathname.match('/p/')) {
+if (window.location.pathname === '/') {
 
-  // 详细页面
-
-  var _parent, _href, _text;
-
-  if (document.querySelectorAll('head meta[property="og:video"]')[0]) {
-    _parent = document.querySelector('._q3gpi');
-    _href = document.querySelectorAll('head meta[property="og:video"]')[0].content;
-    _text = '视频';
-  } else {
-    _parent = document.querySelector('._jjzlb');
-    _href = document.querySelectorAll('head meta[property="og:image"]')[0].content;
-    _text = '图片';
-  }
-
-  addBtn(_parent, _href, _text);
-
-} else if (window.location.pathname === '/') {
-
-  // 首页信息流页面
+  // 首页信息流页
 
   var _box = document.querySelector('._qj7yb');
-  var _parent, _href, _text;
+  var _parent, _url, _text;
 
   _box.addEventListener('mouseover', function(event) {
 
     if (event.target.className === '_icyx7') {
       _parent = event.target.parentNode;
-      _href = event.target.src;
+      _url = event.target.src;
       _text = '图片';
 
-      addBtn(_parent, _href, _text);
+      addBtn(_parent, _url, _text);
     } else if (event.target.className === '_c2kdw') {
       _parent = event.target.parentNode;
-      _href = _parent.querySelector('._c8hkj').src;
+      _url = _parent.querySelector('._c8hkj').src;
       _text = '视频';
 
-      addBtn(_parent, _href, _text);
+      addBtn(_parent, _url, _text);
     }
 
   });
+
+} else if (window.location.pathname.match('/p/')) {
+
+  // 详细页
+
+  var _box = document.querySelector('article._j5hrx');
+  var _parent, _url, _text;
+
+  // 图片
+  if (_box.querySelector('._jjzlb')) {
+    _parent = _box.querySelector('._jjzlb');
+    _url = _parent.querySelector('._icyx7').src;
+    _text = '图片';
+  }
+
+  // 视频
+  if (_box.querySelector('._q3gpi')) {
+    _parent = _box.querySelector('._q3gpi');
+    _url = _parent.querySelector('._c8hkj').src;
+    _text = '视频';
+  }
+
+  addBtn(_parent, _url, _text);
 
 } else {
 
-  // 个人页面弹窗详细页面
-
-  addAriaListener('react-root', function() {
-
-    var _parent, _href, _text;
-    var modal = document.querySelector('._a1rcs');
-
-    if (modal.querySelector('._c8hkj')) {
-      _parent = modal.querySelector('._q3gpi');
-      _href = modal.querySelector('._c8hkj').src;
-      _text = '视频';
-    } else {
-      _parent = modal.querySelector('._jjzlb');
-      _href = modal.querySelector('._icyx7').src;
-      _text = '图片';
-    }
-
-    addBtn(_parent, _href, _text);
-
-  });
+  // 用户页
 
 }
 
-// 监听属性，判断当前页弹窗打开页面
-function addAriaListener(elemId, callback) {
+function addBtn(parent, url, text) {
 
-  var elem = document.getElementById(elemId);
-  var lastName = elem.getAttribute('aria-hidden');
+  if (!parent.querySelector('.downloadBtn')) {
+    var _parent = parent;
+    var _url = url;
+    var _text = text;
+    var _btn = document.createElement('button');
 
-  window.setInterval(function() {
-    var currentName = elem.getAttribute('aria-hidden');
-    if (currentName !== lastName) {
-      if (currentName === 'true') {
-        callback();
-      }
+    _btn.className = 'downloadBtn';
+    _btn.innerHTML = '下载' + _text;
 
-      lastName = currentName;
-    }
-  }, 10);
+    _btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      e.preventDefault();
 
-}
+      // 下载
+      chrome.runtime.sendMessage({
+        msg: 'DL',
+        url: _url
+      });
 
+    }, false);
 
-function addBtn(parent, href, text) {
-
-  var _parent = parent;
-  var _href = href;
-  var _text = text;
-  var _link = document.createElement('a');
-
-  _link.className = 'downloadLink';
-  _link.target = '_blank';
-  _link.href = _href;
-  _link.innerHTML = '打开原' + _text;
-
-  _link.addEventListener('click', function(e) {
-    e.stopPropagation();
-  }, false);
-
-  _parent.appendChild(_link);
+    _parent.appendChild(_btn);
+  }
 
 }

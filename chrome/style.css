@@ -2,7 +2,7 @@
   display: none !important;
 }
 
-.downloadLink {
+.downloadBtn {
   position: absolute;
   opacity: 0;
   right: 20px;
@@ -17,6 +17,8 @@
   border: 1px solid #db2d74;
   background-color: #db2d74;
   color: #fff;
+  white-space: nowrap;
+  outline: none;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -25,11 +27,7 @@
   transition-delay: .1s;
 }
 
-.downloadLink:visited {
-  color: #fff;
-}
-
-._22yr2:hover .downloadLink,
-._ikcuh:hover .downloadLink {
+._jjzlb:hover .downloadBtn,
+._q3gpi:hover .downloadBtn {
   opacity: 1;
 }
