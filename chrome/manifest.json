@@ -3,19 +3,25 @@
 
   "name": "Instagram Helper",
   "description": "自动找到 Instagram 图片和视频的原文件，方便您保存。",
-  "version": "1.1.0",
+  "version": "1.2.0",
+
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon_512.png",
+      "38": "icons/icon_512.png"
+    }
+  },
 
   "icons": {
-    "512": "icons/icon_512.png",
-    "128": "icons/icon_512.png",
+    "16": "icons/icon_512.png",
     "48": "icons/icon_512.png",
-    "32": "icons/icon_512.png"
+    "128": "icons/icon_512.png"
   },
 
   "content_scripts": [
     {
-      "js": ["instagram.js"],
-      "css": ["instagram.css"],
+      "js": ["script.js"],
+      "css": ["style.css"],
       "matches": ["https://www.instagram.com/*"]
     }
   ],
