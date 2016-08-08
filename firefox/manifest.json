@@ -1,0 +1,39 @@
+{
+  "manifest_version": 2,
+
+  "name": "Instagram Helper",
+  "description": "方便下载 Instagram 上的图片和视频。",
+  "version": "1.0.1",
+
+  "browser_action": {
+    "default_icon": {
+      "19": "icons/icon_512.png",
+      "38": "icons/icon_512.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon_512.png",
+    "48": "icons/icon_512.png",
+    "128": "icons/icon_512.png"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+
+  "content_scripts": [
+    {
+      "js": ["script.js"],
+      "css": ["style.css"],
+      "matches": ["https://www.instagram.com/*"]
+    }
+  ],
+
+  "permissions": [
+    "tabs",
+    "downloads",
+    "http://www.instagram.com/*",
+    "https://www.instagram.com/*"
+  ]
+}
