@@ -1,7 +1,12 @@
 # Instagram Helper
 
-> 方便下载图片和视频
+> 方便下载 Instagram 的图片和视频（[预览](screenshots)）
 
-+ [Chrome Extension](https://chrome.google.com/webstore/detail/instagram-helper/albdnahmanonkmhoamgfjbjgbjabbiid)
+![screenshot](screenshots/screenshot.png)
 
-+ [Firefox Addon](https://addons.mozilla.org/zh-CN/firefox/addon/instagram-helper) (version >= 48)
+
+## Download
+
++ [Chrome](https://chrome.google.com/webstore/detail/instagram-helper/albdnahmanonkmhoamgfjbjgbjabbiid)
+
++ [Firefox](https://addons.mozilla.org/zh-CN/firefox/addon/instagram-helper) (version >= 48)
