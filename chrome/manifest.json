@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Instagram Helper",
-  "description": "方便下载 Instagram 上的图片和视频。",
-  "version": "1.4.0",
+  "description": "Easy to download Instagram pictures and videos. 方便下载 Instagram 上的图片和视频。",
+  "version": "1.4.1",
 
   "browser_action": {
     "default_icon": {
