@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Instagram Helper
-// @version      1.0.0
+// @version      1.0.1
 // @namespace    InstagramHelper
 // @homepage     https://github.com/mittya/instagram-helper
 // @description  Easy to download Instagram pictures and videos.
 // @author       mittya
-// @require      https://github.com/mittya/instagram-helper/raw/master/userscript/FileSaver.min.js
+// @require      http://cdn.staticfile.org/FileSaver.js/filesaver.js/2014-08-29/FileSaver.min.js
 // @match        https://www.instagram.com/*
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
