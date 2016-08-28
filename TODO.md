@@ -3,12 +3,14 @@
 + [x] Chrome 扩展
 + [x] Firefox 扩展
 + [ ] Safari 扩展
++ [x] UserScript
 
 ## TODO
 + [x] 更换图标
 + [x] 直接下载
 + [x] 修改下载链接（换成图标）
 + [ ] 国际化
++ [ ] UserScript 图标
 
 
 ## Note
