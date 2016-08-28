@@ -119,10 +119,8 @@
 
                 // download
                 if (typeof GM_download !== 'undefined') {
-                    console.log(1);
                     GM_download(_url, _title[0]);
                 } else {
-                    console.log(2);
                     GM_download_emu(_url, _title[0]);
                 }
 
