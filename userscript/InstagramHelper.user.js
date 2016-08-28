@@ -5,7 +5,7 @@
 // @homepage     https://github.com/mittya/instagram-helper
 // @description  Easy to download Instagram pictures and videos.
 // @author       mittya
-// @require      https://github.com/eligrey/FileSaver.js/raw/master/FileSaver.js
+// @require      https://github.com/mittya/instagram-helper/raw/master/userscript/FileSaver.min.js
 // @match        https://www.instagram.com/*
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
