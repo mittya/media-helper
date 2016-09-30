@@ -1,12 +1,13 @@
 // ==UserScript==
 // @name         Instagram Helper
-// @version      1.0.1
+// @version      1.0.2
 // @namespace    InstagramHelper
 // @homepage     https://github.com/mittya/instagram-helper
 // @description  Easy to download Instagram pictures and videos.
 // @author       mittya
 // @require      http://cdn.staticfile.org/FileSaver.js/filesaver.js/2014-08-29/FileSaver.min.js
 // @match        https://www.instagram.com/*
+// @match        https://*.cdninstagram.com/*
 // @grant        GM_addStyle
 // @grant        GM_xmlhttpRequest
 // @grant        GM_download
@@ -94,9 +95,11 @@
 
         if (!parent.querySelector('.downloadBtn')) {
             var _parent = parent;
-            var _url = url;
+            var _url = url.replace(/\?ig_cache_key=[a-zA-Z0-9%.]+/, '');
             var _title = title;
             var _btn = document.createElement('button');
+
+            var ua = navigator.userAgent.toLowerCase();
 
             // https://gist.github.com/derjanb/4431f674124ef1b11e30
             var GM_download_emu = function (url, title) {
@@ -119,7 +122,12 @@
 
                 // download
                 if (typeof GM_download !== 'undefined') {
-                    GM_download(_url, _title[0]);
+                    // TODO: Safari
+                    if (ua.match(/version\/([\d.]+)/)) {
+                        window.open(_url);
+                    } else {
+                        GM_download(_url, _title[0]);
+                    }
                 } else {
                     GM_download_emu(_url, _title[0]);
                 }
