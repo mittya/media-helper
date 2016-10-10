@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Instagram Helper
-// @version      1.0.2
+// @version      1.0.3
 // @namespace    InstagramHelper
 // @homepage     https://github.com/mittya/instagram-helper
 // @description  Easy to download Instagram pictures and videos.
 // @author       mittya
-// @require      http://cdn.staticfile.org/FileSaver.js/filesaver.js/2014-08-29/FileSaver.min.js
+// @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js
 // @match        https://www.instagram.com/*
 // @match        https://*.cdninstagram.com/*
 // @grant        GM_addStyle
@@ -29,6 +29,32 @@
         'subtree': true
     };
     mo.observe(document.querySelector('#react-root'), option);
+
+    var GM_download_blob = function(src, title) {
+       var img = new Image();
+       img.crossOrigin = 'Anonymous';
+       img.onload = function() {
+           var canvas = document.createElement('CANVAS');
+           var ctx = canvas.getContext('2d');
+           var dataURL;
+           canvas.height = this.height;
+           canvas.width = this.width;
+           ctx.drawImage(this, 0, 0);
+
+           // 保存图片
+           canvas.toBlob(function(blob) {
+               saveAs(blob, title);
+           }, 'image/jpeg', 0.8);
+
+           canvas = null;
+       };
+
+       img.src = src;
+       if (img.complete || img.complete === undefined) {
+          img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+          img.src = src;
+       }
+    };
 
     init();
 
@@ -96,24 +122,10 @@
         if (!parent.querySelector('.downloadBtn')) {
             var _parent = parent;
             var _url = url.replace(/\?ig_cache_key=[a-zA-Z0-9%.]+/, '');
-            var _title = title;
+            var _title = title[0];
             var _btn = document.createElement('button');
 
             var ua = navigator.userAgent.toLowerCase();
-
-            // https://gist.github.com/derjanb/4431f674124ef1b11e30
-            var GM_download_emu = function (url, title) {
-                GM_xmlhttpRequest({
-                    method: 'GET',
-                    url: url,
-                    onload: function(r) {
-                        var b = new Blob([r.responseText], {
-                          type: 'text/plain'
-                        });
-                        saveAs(b, title);
-                    }
-                });
-            };
 
             _btn.className = 'downloadBtn';
 
@@ -122,14 +134,19 @@
 
                 // download
                 if (typeof GM_download !== 'undefined') {
-                    // TODO: Safari
+                    // Safari
                     if (ua.match(/version\/([\d.]+)/)) {
                         window.open(_url);
                     } else {
-                        GM_download(_url, _title[0]);
+                        GM_download(_url, _title);
                     }
                 } else {
-                    GM_download_emu(_url, _title[0]);
+                    // Firefox
+                    if (_title.indexOf('.mp4') >= 0) {
+                        window.open(_url);
+                    } else {
+                        GM_download_blob(_url, _title);
+                    }
                 }
 
             }, false);
