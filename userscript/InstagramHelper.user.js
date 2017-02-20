@@ -1,9 +1,11 @@
 // ==UserScript==
 // @name         Instagram Helper
-// @version      1.0.3
+// @name:zh-CN   Instagram Helper
+// @version      1.0.4
 // @namespace    InstagramHelper
 // @homepage     https://github.com/mittya/instagram-helper
 // @description  Easy to download Instagram pictures and videos.
+// @description:zh-cn  方便下载 Instagram 的图片和视频。
 // @author       mittya
 // @require      https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js
 // @match        https://www.instagram.com/*
