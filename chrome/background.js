@@ -10,7 +10,8 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if ((request.msg).search('DL') != -1) {
     chrome.downloads.download({
-      url: request.url
+      url: request.url,
+      filename: request.filename
     });
   }
 });
