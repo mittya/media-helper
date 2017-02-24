@@ -9,7 +9,6 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if ((request.msg).search('DL') != -1) {
-    // 下载
     chrome.downloads.download({
       url: request.url
     });
