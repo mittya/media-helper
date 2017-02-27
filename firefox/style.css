@@ -18,7 +18,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
-  transition: opacity .2s ease-out;
+  transition: opacity .1s ease-out;
   transition-delay: .1s;
   border-radius: 3px;
   border: 1px solid #db2d74;
@@ -32,6 +32,11 @@
 ._jjzlb:hover .downloadBtn,
 ._q3gpi:hover .downloadBtn {
   opacity: 1;
+}
+
+._jjzlb:active .downloadBtn,
+._q3gpi:active .downloadBtn {
+  opacity: .9;
 }
 
 /* 隐藏禁止右键保存遮罩 */

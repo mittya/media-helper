@@ -3,7 +3,7 @@
 
   "name": "Instagram Helper",
   "description": "方便下载 Instagram 上的图片和视频。",
-  "version": "1.0.1",
+  "version": "1.5.2",
 
   "browser_action": {
     "default_icon": {
