@@ -41,32 +41,31 @@ if (window.location.pathname === '/') {
 
 function findMedia(box) {
   var _box = box;
-  var _parent, _url, _filename;
+  var _parent, _url, _username;
 
   _box.addEventListener('mouseover', function(event) {
     if (event.target.className === '_icyx7') {
       _parent = event.target.parentNode;
       _url = event.target.src;
-      _filename = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+      _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
-      addBtn(_parent, _url, _filename);
+      addBtn(_parent, _url, _username);
     }
 
     if (event.target.className === '_c2kdw') {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('._c8hkj').src;
-      _filename = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+      _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
-      addBtn(_parent, _url, _filename);
+      addBtn(_parent, _url, _username);
     }
   });
 }
 
-function addBtn(parent, url, filename) {
+function addBtn(parent, url, username) {
   var _parent = parent;
   var _url = url;
-  var _filename = filename;
-  _filename = _filename + '_' + _url.substring(_url.lastIndexOf('/') + 1, _url.length);
+  var _filename = username + '_' + _url.substring(_url.lastIndexOf('/') + 1, _url.length);
 
   if (_parent.querySelector('.downloadBtn')) {
     _parent.removeChild(_parent.querySelector('.downloadBtn'));
@@ -75,13 +74,13 @@ function addBtn(parent, url, filename) {
   var _btn = document.createElement('button');
   _btn.className = 'downloadBtn';
 
-  _btn.addEventListener('click', function(e) {
-    e.stopPropagation();
+  _btn.addEventListener('click', function(event) {
+    event.stopPropagation();
 
     // Download
     chrome.runtime.sendMessage({
       msg: 'DL',
-      url: url,
+      url: _url,
       filename: _filename
     });
   }, false);
