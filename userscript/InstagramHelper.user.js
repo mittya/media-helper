@@ -105,6 +105,7 @@
         _parent = event.target.parentNode;
         _url = event.target.src;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
+		_url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
         addBtn(_parent, _url, _title, _username);
@@ -114,6 +115,7 @@
         _parent = event.target.parentNode;
         _url = _parent.querySelector('._c8hkj').src;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
+		_url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
         addBtn(_parent, _url, _title, _username);
