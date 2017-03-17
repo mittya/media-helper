@@ -47,6 +47,7 @@ function findMedia(box) {
     if (event.target.className === '_icyx7') {
       _parent = event.target.parentNode;
       _url = event.target.src;
+	  _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
       _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
       addBtn(_parent, _url, _username);
@@ -55,6 +56,7 @@ function findMedia(box) {
     if (event.target.className === '_c2kdw') {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('._c8hkj').src;
+	  _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
       _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
 
       addBtn(_parent, _url, _username);
