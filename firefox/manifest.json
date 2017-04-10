@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Instagram Helper",
+  "name": "InsHelper",
   "description": "方便下载 Instagram 上的图片和视频。",
-  "version": "1.5.2",
+  "version": "1.6.0",
 
   "browser_action": {
     "default_icon": {
