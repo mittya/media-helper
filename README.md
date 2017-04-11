@@ -1,8 +1,8 @@
 # InsHelper
 
-> Easily download Instagram's pictures and videos ([preview](screenshots))  
+> Easily download Instagram pictures and videos ([preview](screenshots))  
 
-> 方便下载 Instagram 的图片和视频（[预览](screenshots)）  
+> 轻松下载 Instagram 的图片和视频（[预览](screenshots)）  
 
 ![screenshot](screenshots/screenshot.png)
 

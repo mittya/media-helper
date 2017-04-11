@@ -1,11 +1,11 @@
 // ==UserScript==
-// @name               InsHelper
-// @name:zh-CN         InsHelper
-// @version            1.6.0
+// @name               InsHelper: download Instagram pic & vids
+// @name:zh-CN         InsHelper: 下载 Instagram 图片和视频
+// @version            1.6.2
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
-// @description        Easily download Instagram's pictures and videos.
-// @description:zh-cn  方便下载 Instagram 的图片和视频。
+// @description        Easily download Instagram pictures and videos.
+// @description:zh-cn  轻松下载 Instagram 的图片和视频。
 // @author             mittya
 // @require            https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.3/FileSaver.min.js
 // @match              https://www.instagram.com/*
