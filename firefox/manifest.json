@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "InsHelper",
+  "name": "IGHelper",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.6.2",
+  "version": "1.6.3",
 
   "browser_action": {
     "default_icon": {

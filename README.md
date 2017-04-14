@@ -1,4 +1,4 @@
-# InsHelper
+# IGHelper
 
 > Easily download Instagram pictures and videos ([preview](screenshots))  
 
