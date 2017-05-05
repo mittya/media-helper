@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IGHelper: download Instagram pic & vids
 // @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.6.3
+// @version            1.7.0
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -83,13 +83,18 @@
   function init() {
     if (window.location.pathname === '/') {
       //  Home page
-      var _box_home = document.querySelector('._qj7yb');
+      var _box_home = document.querySelector('#react-root > section > main > section > div');
       if (_box_home) {
         findMedia(_box_home);
       }
     } else if (window.location.pathname.match('/p/')) {
       // Detail page
-      var _box_detail = document.querySelector('article._j5hrx');
+      var _box_detail = '';
+      if (document.querySelector('div[role="dialog"]')) {
+        _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+      } else {
+        _box_detail = document.querySelector('#react-root > section > main article');
+      }
       findMedia(_box_detail);
     }
   }
@@ -106,7 +111,7 @@
         _url = event.target.src;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
 		_url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-        _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+        _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
 
         addBtn(_parent, _url, _title, _username);
       }
@@ -116,7 +121,7 @@
         _url = _parent.querySelector('._c8hkj').src;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
 		_url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-        _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+        _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
 
         addBtn(_parent, _url, _title, _username);
       }
@@ -165,13 +170,13 @@
       _parent.appendChild(_btn);
 
       // More media on one box
-      if (_parent.querySelector('.coreSpriteRightPaginationArrow') || _parent.parents('article._j5hrx')[0].querySelector('.coreSpriteRightPaginationArrow')) {
-        var _btn_right = _parent.querySelector('.coreSpriteRightPaginationArrow') ? _parent.querySelector('.coreSpriteRightPaginationArrow') : _parent.parents('article._j5hrx')[0].querySelector('.coreSpriteRightPaginationArrow');
+      if (_parent.querySelector('.coreSpriteRightPaginationArrow') || _parent.parents('article')[0].querySelector('.coreSpriteRightPaginationArrow')) {
+        var _btn_right = _parent.querySelector('.coreSpriteRightPaginationArrow') ? _parent.querySelector('.coreSpriteRightPaginationArrow') : _parent.parents('article')[0].querySelector('.coreSpriteRightPaginationArrow');
         _btn_right.addEventListener('click', removeBtn, false);
       }
 
-      if (_parent.querySelector('.coreSpriteLeftPaginationArrow') || _parent.parents('article._j5hrx')[0].querySelector('.coreSpriteLeftPaginationArrow')) {
-        var _btn_left = _parent.querySelector('.coreSpriteLeftPaginationArrow') ? _parent.querySelector('.coreSpriteLeftPaginationArrow') : _parent.parents('article._j5hrx')[0].querySelector('.coreSpriteLeftPaginationArrow');
+      if (_parent.querySelector('.coreSpriteLeftPaginationArrow') || _parent.parents('article')[0].querySelector('.coreSpriteLeftPaginationArrow')) {
+        var _btn_left = _parent.querySelector('.coreSpriteLeftPaginationArrow') ? _parent.querySelector('.coreSpriteLeftPaginationArrow') : _parent.parents('article')[0].querySelector('.coreSpriteLeftPaginationArrow');
         _btn_left.addEventListener('click', removeBtn, false);
       }
     }

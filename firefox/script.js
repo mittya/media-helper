@@ -25,7 +25,7 @@ Element.prototype.parents = function(selector) {
 */
 if (window.location.pathname === '/') {
   //  Home page
-  var _box = document.querySelector('._qj7yb');
+  var _box = document.querySelector('#react-root > section > main > section > div');
 
   // Logged in
   if (_box) {
@@ -33,7 +33,12 @@ if (window.location.pathname === '/') {
   }
 } else if (window.location.pathname.match('/p/')) {
   // Detail page
-  var _box = document.querySelector('article._j5hrx');
+  var _box = '';
+  if (document.querySelector('div[role="dialog"]')) {
+    _box = document.querySelector('div[role="dialog"]').querySelector('article');
+  } else {
+    _box = document.querySelector('#react-root > section > main article');
+  }
 
   findMedia(_box);
 }
@@ -47,8 +52,8 @@ function findMedia(box) {
     if (event.target.className === '_icyx7') {
       _parent = event.target.parentNode;
       _url = event.target.src;
-	  _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+      _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
 
       addBtn(_parent, _url, _username);
     }
@@ -56,8 +61,8 @@ function findMedia(box) {
     if (event.target.className === '_c2kdw') {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('._c8hkj').src;
-	  _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article._j5hrx')[0].querySelector('._4zhc5').title;
+      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+      _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
 
       addBtn(_parent, _url, _username);
     }
