@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IGHelper: download Instagram pic & vids
 // @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.7.0
+// @version            1.7.1
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -170,13 +170,16 @@
       _parent.appendChild(_btn);
 
       // More media on one box
-      if (_parent.querySelector('.coreSpriteRightPaginationArrow') || _parent.parents('article')[0].querySelector('.coreSpriteRightPaginationArrow')) {
-        var _btn_right = _parent.querySelector('.coreSpriteRightPaginationArrow') ? _parent.querySelector('.coreSpriteRightPaginationArrow') : _parent.parents('article')[0].querySelector('.coreSpriteRightPaginationArrow');
+      var _left_btn = '.coreSpriteLeftChevron';
+      var _right_btn = '.coreSpriteRightChevron';
+
+      if (_parent.querySelector(_right_btn) || _parent.parents('article')[0].querySelector(_right_btn)) {
+        var _btn_right = _parent.querySelector(_right_btn) ? _parent.querySelector(_right_btn) : _parent.parents('article')[0].querySelector(_right_btn);
         _btn_right.addEventListener('click', removeBtn, false);
       }
 
-      if (_parent.querySelector('.coreSpriteLeftPaginationArrow') || _parent.parents('article')[0].querySelector('.coreSpriteLeftPaginationArrow')) {
-        var _btn_left = _parent.querySelector('.coreSpriteLeftPaginationArrow') ? _parent.querySelector('.coreSpriteLeftPaginationArrow') : _parent.parents('article')[0].querySelector('.coreSpriteLeftPaginationArrow');
+      if (_parent.querySelector(_left_btn) || _parent.parents('article')[0].querySelector(_left_btn)) {
+        var _btn_left = _parent.querySelector(_left_btn) ? _parent.querySelector(_left_btn) : _parent.parents('article')[0].querySelector(_left_btn);
         _btn_left.addEventListener('click', removeBtn, false);
       }
     }
