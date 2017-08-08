@@ -25,7 +25,7 @@ Element.prototype.parents = function(selector) {
 */
 if (window.location.pathname === '/') {
   //  Home page
-  var _box = document.querySelector('#react-root > section > main > section > div');
+  var _box = document.querySelector('#react-root > section > main > section > div > div > div');
 
   // Logged in
   if (_box) {
@@ -33,14 +33,22 @@ if (window.location.pathname === '/') {
   }
 } else if (window.location.pathname.match('/p/')) {
   // Detail page
-  var _box = '';
-  if (document.querySelector('div[role="dialog"]')) {
-    _box = document.querySelector('div[role="dialog"]').querySelector('article');
-  } else {
-    _box = document.querySelector('#react-root > section > main article');
-  }
 
-  findMedia(_box);
+  // TODO: 内页有时获取不到 djalog
+  setTimeout(function() {
+    var _box = '';
+
+    if (document.querySelector('div[role="dialog"]')) {
+      // djalog
+      _box = document.querySelector('div[role="dialog"]').querySelector('article');
+    } else {
+      // absolute
+      _box = document.querySelector('#react-root > section > main article');
+    }
+
+    findMedia(_box);
+  }, 1000);
+
 }
 
 
@@ -49,20 +57,30 @@ function findMedia(box) {
   var _parent, _url, _username;
 
   _box.addEventListener('mouseover', function(event) {
-    if (event.target.className === '_icyx7') {
+
+    // img class: _2di5p
+    if (event.target.className === '_2di5p') {
+
+      if (event.target.width < 300) {
+        // thumb
+        return;
+      }
+
       _parent = event.target.parentNode;
       _url = event.target.src;
       _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
+      _username = _parent.parents('article')[0].querySelector('header > div > a').title;
 
       addBtn(_parent, _url, _username);
     }
 
-    if (event.target.className === '_c2kdw') {
+    // video parents class: _7thjo
+    // video class: _l6uaz
+    if (event.target.className === '_7thjo') {
       _parent = event.target.parentNode;
-      _url = _parent.querySelector('._c8hkj').src;
+      _url = _parent.querySelector('._l6uaz').src;
       _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article')[0].querySelector('._4zhc5').title;
+      _username = _parent.parents('article')[0].querySelector('header > div > a').title;
 
       addBtn(_parent, _url, _username);
     }
