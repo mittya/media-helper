@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IGHelper: download Instagram pic & vids
 // @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.7.3
+// @version            1.7.4
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -78,7 +78,6 @@
   /*
       Main
   */
-  init();
 
   function init() {
     if (window.location.pathname === '/') {
@@ -111,9 +110,12 @@
         _url = event.target.src;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-        _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
-
-        addBtn(_parent, _url, _title, _username);
+        _username = '';
+        if (_parent.parents('article')[0].querySelector('._2g7d5')) {
+          // TODO: 此内容不应在缩略图页面出现，但不明原因出现了。暂时做判断，如果在缩略图页面时不下载图片。同时避免报错。
+          _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+          addBtn(_parent, _url, _title, _username);
+        }
       }
 
       if (event.target.className === '_7thjo') {
