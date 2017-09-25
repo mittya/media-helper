@@ -69,7 +69,10 @@ function findMedia(box) {
       _parent = event.target.parentNode;
       _url = event.target.src;
       _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article')[0].querySelector('header > div a').title;
+      _username = '';
+      if (_parent.parents('article')[0].querySelector('._2g7d5')) {
+        _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+      }
 
       addBtn(_parent, _url, _username);
     }
@@ -80,7 +83,10 @@ function findMedia(box) {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('._l6uaz').src;
       _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('article')[0].querySelector('header > div a').title;
+      _username = '';
+      if (_parent.parents('article')[0].querySelector('._2g7d5')) {
+        _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+      }
 
       addBtn(_parent, _url, _username);
     }
