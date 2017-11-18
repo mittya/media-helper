@@ -25,35 +25,47 @@ Element.prototype.parents = function(selector) {
 */
 if (window.location.pathname === '/') {
   //  Home page
-  var _box = document.querySelector('#react-root > section > main > section > div > div > div');
+  var _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
 
   // Logged in
-  if (_box) {
-    findMedia(_box);
+  if (_box_home) {
+    findMedia(_box_home);
   }
 } else if (window.location.pathname.match('/p/')) {
   // Detail page
 
-  // TODO: 内页有时获取不到 djalog
-  setTimeout(function() {
-    var _box = '';
+  var _box_detail = '';
 
+  setTimeout(function() {
+    // first click is absolute，second is dialog
     if (document.querySelector('div[role="dialog"]')) {
       // djalog
-      _box = document.querySelector('div[role="dialog"]').querySelector('article');
+      _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+      findMedia(_box_detail);
     } else {
       // absolute
-      _box = document.querySelector('#react-root > section > main article');
+      _box_detail = document.querySelector('#react-root > section > main article');
+      findMedia(_box_detail);
     }
+  }, 1000); // TODO: 初次点击缩略图不能捕捉 dialog，这里临时用 setTimeout 修复
 
-    findMedia(_box);
-  }, 1000);
+} else if (window.location.pathname.match('/stories/')) {
+  // Stories page
+
+  // TODO: remove setTimeout
+  setTimeout(function() {
+    var _box_story = document.querySelector('#react-root > section div._ni05h');
+
+    if (_box_story) {
+      findMedia(_box_story, 'stories');
+    }
+  }, 50);
 
 }
 
 
-function findMedia(box) {
-  var _box = box;
+function findMedia(box, way) {
+  var _box = box, _way = way;
   var _parent, _url, _username;
 
   _box.addEventListener('mouseover', function(event) {
@@ -61,20 +73,20 @@ function findMedia(box) {
     // img class: _2di5p
     if (event.target.className === '_2di5p') {
 
-      if (event.target.width < 300) {
-        // thumb
-        return;
+      // disabled on the thumbnail page
+      if (event.target.width > 300) {
+        _parent = event.target.parentNode;
+        _url = event.target.src;
+        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+        _username = '';
+
+        if (_parent.parents('article')[0].querySelector('._2g7d5')) {
+          _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+        }
+
+        addBtn(_parent, _url, _username);
       }
 
-      _parent = event.target.parentNode;
-      _url = event.target.src;
-      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = '';
-      if (_parent.parents('article')[0].querySelector('._2g7d5')) {
-        _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
-      }
-
-      addBtn(_parent, _url, _username);
     }
 
     // video parents class: _7thjo
@@ -90,6 +102,30 @@ function findMedia(box) {
 
       addBtn(_parent, _url, _username);
     }
+
+    // Stories video
+    if (_way === 'stories' && event.target.tagName === 'VIDEO') {
+      _parent = event.target.parentNode;
+      _url = _parent.querySelector('video > source').src;
+      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+      _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+      addBtn(_parent, _url, _username);
+
+      return false;
+    }
+
+    // Stories Picture
+    if (_way === 'stories' && event.target.tagName === 'IMG') {
+      _parent = event.target.parentNode;
+      _url = _parent.querySelector('img').src;
+      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+      _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+      addBtn(_parent, _url, _username);
+
+      return false;
+    }
   });
 }
 
@@ -103,7 +139,12 @@ function addBtn(parent, url, username) {
   }
 
   var _btn = document.createElement('button');
-  _btn.className = 'downloadBtn';
+
+  if (window.location.pathname.match('/stories/')) {
+    _btn.className = 'downloadBtn inStories';
+  } else {
+    _btn.className = 'downloadBtn';
+  }
 
   _btn.addEventListener('click', function(event) {
     event.stopPropagation();
