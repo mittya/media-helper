@@ -54,8 +54,7 @@
   opacity: .9;
 }
 
-
-._si7dy /* pic cover */,
-._o95x1 /* stories cover */ {
+/* pic cover */
+._si7dy {
   display: none !important;
 }

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IGHelper: download Instagram pic & vids
 // @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.8.0
+// @version            1.8.1
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -29,7 +29,7 @@
               '}' +
               '.downloadBtn.inStories {width:28px; top:10px; right:10px; border-radius:50%; font-size:12px; background-size:18px;}' +
               '._4rbun:hover .downloadBtn,._6jl3c:hover .downloadBtn {opacity:1} ' +
-              '._si7dy, ._o95x1 {display:none !important}' +
+              '._si7dy {display:none !important}' +
               '._2us5i:hover .downloadBtn {opacity:1}');
 
   Element.prototype.parents = function(selector) {
@@ -151,31 +151,36 @@
         addBtn(_parent, _url, _title, _username);
       }
 
-      // Stories video
-      if (_way === 'stories' && event.target.tagName === 'VIDEO') {
-        _parent = event.target.parentNode;
-        _url = _parent.querySelector('video > source').src;
-        _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+      // Stories Video & Picture
+      // when autoplay videos disabled, user click the '._o95x1' cover to play the video.
+      if (_way === 'stories' && event.target.className === '_o95x1') {
 
-        addBtn(_parent, _url, _title, _username);
+        var _current_target = document.querySelector('._o95x1').previousSibling;
 
-        return false;
+        if (_current_target.querySelector('video')) {
+          _parent = _current_target;
+          _url = _parent.querySelector('video > source').src;
+          _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+          _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+          addBtn(_parent, _url, _username);
+
+          return false;
+        }
+
+        if (_current_target.querySelector('img')) {
+          _parent = _current_target;
+          _url = _parent.querySelector('img').src;
+          _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+          _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+          addBtn(_parent, _url, _username);
+
+          return false;
+        }
+
       }
 
-      // Stories Picture
-      if (_way === 'stories' && event.target.tagName === 'IMG') {
-        _parent = event.target.parentNode;
-        _url = _parent.querySelector('img').src;
-        _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
-
-        addBtn(_parent, _url, _title, _username);
-
-        return false;
-      }
     });
   }
 

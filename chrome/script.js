@@ -103,29 +103,36 @@ function findMedia(box, way) {
       addBtn(_parent, _url, _username);
     }
 
-    // Stories video
-    if (_way === 'stories' && event.target.tagName === 'VIDEO') {
-      _parent = event.target.parentNode;
-      _url = _parent.querySelector('video > source').src;
-      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+    // Stories Video & Picture
+    // when autoplay videos disabled, user click the '._o95x1' cover to play the video.
+    if (_way === 'stories' && event.target.className === '_o95x1') {
 
-      addBtn(_parent, _url, _username);
+      var _current_target = document.querySelector('._o95x1').previousSibling;
 
-      return false;
+      if (_current_target.querySelector('video')) {
+        _parent = _current_target;
+        _url = _parent.querySelector('video > source').src;
+        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+        addBtn(_parent, _url, _username);
+
+        return false;
+      }
+
+      if (_current_target.querySelector('img')) {
+        _parent = _current_target;
+        _url = _parent.querySelector('img').src;
+        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+
+        addBtn(_parent, _url, _username);
+
+        return false;
+      }
+
     }
 
-    // Stories Picture
-    if (_way === 'stories' && event.target.tagName === 'IMG') {
-      _parent = event.target.parentNode;
-      _url = _parent.querySelector('img').src;
-      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
-      _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
-
-      addBtn(_parent, _url, _username);
-
-      return false;
-    }
   });
 }
 
