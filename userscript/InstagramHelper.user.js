@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IGHelper: download Instagram pic & vids
 // @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.8.1
+// @version            1.8.2
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -19,7 +19,45 @@
 (function() {
   'use strict';
 
-  GM_addStyle('.downloadBtn {' +
+  var GM_download_extra = function(src, title) {
+    var img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = function() {
+      var canvas = document.createElement('CANVAS');
+      var ctx = canvas.getContext('2d');
+      var dataURL;
+      canvas.height = this.height;
+      canvas.width = this.width;
+      ctx.drawImage(this, 0, 0);
+
+      // Save image
+      canvas.toBlob(function(blob) {
+        saveAs(blob, title);
+      }, 'image/jpeg', 0.8);
+
+      canvas = null;
+    };
+
+    img.src = src;
+    if (img.complete || img.complete === undefined) {
+      img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
+      img.src = src;
+    }
+  };
+
+  var GM_addStyle_extra = function(css) {
+    var _head = document.getElementsByTagName('head')[0];
+    if (_head) {
+      var _style = document.createElement('style');
+      _style.setAttribute('type', 'text/css');
+      _style.textContent = css;
+      _head.appendChild(_style);
+      return _style;
+    }
+    return null;
+  };
+
+  var ig_helper_style = '.downloadBtn {' +
               'position:absolute; width:46px; height:28px; opacity:0; right:25px; top:25px; z-index:1; text-align:center;' +
               'font-size:14px; line-height:26px; padding:0 8px; font-weight:600; color:#fff; white-space:nowrap; outline:0;' +
               'cursor:pointer; -webkit-user-select:none; -moz-user-select:none; user-select:none;' +
@@ -30,7 +68,14 @@
               '.downloadBtn.inStories {width:28px; top:10px; right:10px; border-radius:50%; font-size:12px; background-size:18px;}' +
               '._4rbun:hover .downloadBtn,._6jl3c:hover .downloadBtn {opacity:1} ' +
               '._si7dy {display:none !important}' +
-              '._2us5i:hover .downloadBtn {opacity:1}');
+              '._2us5i:hover .downloadBtn {opacity:1}';
+
+  if (typeof GM_addStyle !== 'undefined') {
+    GM_addStyle(ig_helper_style);
+  } else {
+    // Greasemonkey 4.0 remove the GM_addStyle function.
+    GM_addStyle_extra(ig_helper_style);
+  }
 
   Element.prototype.parents = function(selector) {
     // Vanilla JS jQuery.parents() realisation
@@ -60,31 +105,6 @@
   };
   observer.observe(document.body, config);
 
-  var GM_download_blob = function(src, title) {
-    var img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.onload = function() {
-      var canvas = document.createElement('CANVAS');
-      var ctx = canvas.getContext('2d');
-      var dataURL;
-      canvas.height = this.height;
-      canvas.width = this.width;
-      ctx.drawImage(this, 0, 0);
-
-      // Save image
-      canvas.toBlob(function(blob) {
-        saveAs(blob, title);
-      }, 'image/jpeg', 0.8);
-
-      canvas = null;
-    };
-
-    img.src = src;
-    if (img.complete || img.complete === undefined) {
-      img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
-      img.src = src;
-    }
-  };
 
   /*
       Main
@@ -122,11 +142,12 @@
 
   function findMedia(box, way) {
     var _box = box, _way = way;
-    var _parent, _url, _title, _username;
+    var _parent, _url, _username, _title;
 
     _box.addEventListener('mouseover', function(event) {
       event.stopPropagation();
 
+      // Picture
       if (event.target.className === '_2di5p') {
         _parent = event.target.parentNode;
         _url = event.target.src;
@@ -137,10 +158,11 @@
         if (_parent.parents('article')[0].querySelector('._2g7d5')) {
           // TODO: 此内容不应在缩略图页面出现，但不明原因出现了。暂时做判断，如果在缩略图页面时不下载图片。同时避免报错。
           _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
-          addBtn(_parent, _url, _title, _username);
+          addBtn(_parent, _url, _username, _title);
         }
       }
 
+      // Video
       if (event.target.className === '_7thjo') {
         _parent = event.target.parentNode;
         _url = _parent.querySelector('._l6uaz').src;
@@ -148,7 +170,7 @@
         _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
 
-        addBtn(_parent, _url, _title, _username);
+        addBtn(_parent, _url, _username, _title);
       }
 
       // Stories Video & Picture
@@ -160,10 +182,11 @@
         if (_current_target.querySelector('video')) {
           _parent = _current_target;
           _url = _parent.querySelector('video > source').src;
+          _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
           _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
-          addBtn(_parent, _url, _username);
+          addBtn(_parent, _url, _username, _title);
 
           return false;
         }
@@ -171,10 +194,10 @@
         if (_current_target.querySelector('img')) {
           _parent = _current_target;
           _url = _parent.querySelector('img').src;
-          _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
+          _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
-          addBtn(_parent, _url, _username);
+          addBtn(_parent, _url, _username, _title);
 
           return false;
         }
@@ -184,7 +207,7 @@
     });
   }
 
-  function addBtn(parent, url, title, username) {
+  function addBtn(parent, url, username, title) {
 
     if (!parent.querySelector('.downloadBtn')) {
       var _parent = parent;
@@ -222,7 +245,7 @@
           if (_title.indexOf('.mp4') >= 0) {
             window.open(_url);
           } else {
-            GM_download_blob(_url, _filename);
+            GM_download_extra(_url, _filename);
           }
         }
       }, false);
