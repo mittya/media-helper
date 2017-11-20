@@ -58,3 +58,8 @@
 ._si7dy {
   display: none !important;
 }
+
+/* Top Bar ._tpnch zIndex > .downloadBtn zIndex */
+._tpnch {
+  z-index: 3 !important;
+}

@@ -68,7 +68,8 @@
               '.downloadBtn.inStories {width:28px; top:10px; right:10px; border-radius:50%; font-size:12px; background-size:18px;}' +
               '._4rbun:hover .downloadBtn,._6jl3c:hover .downloadBtn {opacity:1} ' +
               '._si7dy {display:none !important}' +
-              '._2us5i:hover .downloadBtn {opacity:1}';
+              '._2us5i:hover .downloadBtn {opacity:1}' +
+              '._tpnch {z-index:3 !important;}';
 
   if (typeof GM_addStyle !== 'undefined') {
     GM_addStyle(ig_helper_style);
