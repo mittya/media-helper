@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name               IGHelper: download Instagram pic & vids
-// @name:zh-CN         IGHelper: 下载 Instagram 图片和视频
-// @version            1.8.2
+// @name               IG Helper: download Instagram pic & vids
+// @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
+// @version            1.8.3
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
