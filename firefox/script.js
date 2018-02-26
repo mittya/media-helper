@@ -77,7 +77,6 @@ function findMedia(box, way) {
       if (event.target.width > 300) {
         _parent = event.target.parentNode;
         _url = event.target.src;
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = '';
 
         if (_parent.parents('article')[0].querySelector('._2g7d5')) {
@@ -94,7 +93,6 @@ function findMedia(box, way) {
     if (event.target.className === '_7thjo') {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('._l6uaz').src;
-      _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
       _username = '';
       if (_parent.parents('article')[0].querySelector('._2g7d5')) {
         _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
@@ -112,7 +110,6 @@ function findMedia(box, way) {
       if (_current_target.querySelector('video')) {
         _parent = _current_target;
         _url = _parent.querySelector('video > source').src;
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
         addBtn(_parent, _url, _username);
@@ -123,7 +120,6 @@ function findMedia(box, way) {
       if (_current_target.querySelector('img')) {
         _parent = _current_target;
         _url = _parent.querySelector('img').src;
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
         addBtn(_parent, _url, _username);

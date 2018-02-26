@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.3
+// @version            1.8.5
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -153,7 +153,6 @@
         _parent = event.target.parentNode;
         _url = event.target.src;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = '';
 
         if (_parent.parents('article')[0].querySelector('._2g7d5')) {
@@ -168,7 +167,6 @@
         _parent = event.target.parentNode;
         _url = _parent.querySelector('._l6uaz').src;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
-        _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
         _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
 
         addBtn(_parent, _url, _username, _title);
@@ -184,7 +182,6 @@
           _parent = _current_target;
           _url = _parent.querySelector('video > source').src;
           _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
-          _url = _url.replace(/[a-zA-Z][0-9]+x[0-9]+\//, '');
           _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
           addBtn(_parent, _url, _username, _title);
