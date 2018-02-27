@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.5
+// @version            1.8.6
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -173,8 +173,8 @@
       }
 
       // Stories Video & Picture
-      // when autoplay videos disabled, user click the '._o95x1' cover to play the video.
-      if (_way === 'stories' && event.target.className === '_o95x1') {
+      // when autoplay videos disabled, user click the '._o95x1 > ._v88d1' cover to play the video.
+      if (_way === 'stories' && event.target.className === '_v88d1') {
 
         var _current_target = document.querySelector('._o95x1').previousSibling;
 

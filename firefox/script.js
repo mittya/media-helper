@@ -102,8 +102,8 @@ function findMedia(box, way) {
     }
 
     // Stories Video & Picture
-    // when autoplay videos disabled, user click the '._o95x1' cover to play the video.
-    if (_way === 'stories' && event.target.className === '_o95x1') {
+    // when autoplay videos disabled, user click the '._o95x1 > ._v88d1' cover to play the video.
+    if (_way === 'stories' && event.target.className === '_v88d1') {
 
       var _current_target = document.querySelector('._o95x1').previousSibling;
 
