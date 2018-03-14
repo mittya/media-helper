@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.6
+// @version            1.8.8
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -43,6 +43,25 @@
       img.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
       img.src = src;
     }
+  };
+
+  var GM_download_extra_video = function(src, title) {
+    fetch(src).then(function(res) {
+
+      res.blob().then(function(blob) {
+        var _link = document.createElement('a');
+        _link.download = title;
+        _link.style.display = 'none';
+
+        var _blob = new Blob([blob]);
+        _link.href = URL.createObjectURL(_blob);
+
+        document.body.appendChild(_link);
+        _link.click();
+        document.body.removeChild(_link);
+      });
+
+    });
   };
 
   var GM_addStyle_extra = function(css) {
@@ -177,9 +196,9 @@
       if (_way === 'stories' && event.target.className === '_v88d1') {
 
         var _current_target = document.querySelector('._o95x1').previousSibling;
+        _parent = _current_target.parentNode;
 
-        if (_current_target.querySelector('video')) {
-          _parent = _current_target;
+        if (_parent.querySelector('video')) {
           _url = _parent.querySelector('video > source').src;
           _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
@@ -189,8 +208,7 @@
           return false;
         }
 
-        if (_current_target.querySelector('img')) {
-          _parent = _current_target;
+        if (_parent.querySelector('img')) {
           _url = _parent.querySelector('img').src;
           _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
@@ -236,12 +254,26 @@
           if (_ua.match(/version\/([\d.]+)/)) {
             window.open(_url);
           } else {
-            GM_download(_url, _filename);
+            var ua = navigator.userAgent.toLowerCase();
+            var chromeVersion = ua.match(/chrome\/\d./g)[0].replace('chrome/', '');
+
+            if (parseInt(chromeVersion) >= 65) {
+              // Chrome v65 更新后 GM_download 暂时无法使用，使用 GM_download_extra & GM_download_extra_video 代替
+
+              if (_title.indexOf('.mp4') >= 0) {
+                GM_download_extra_video(_url, _filename);
+              } else {
+                GM_download_extra(_url, _filename);
+              }
+            } else {
+              GM_download(_url, _filename);
+            }
           }
         } else {
           // Firefox
           if (_title.indexOf('.mp4') >= 0) {
-            window.open(_url);
+            // window.open(_url);
+            GM_download_extra_video(_url, _filename);
           } else {
             GM_download_extra(_url, _filename);
           }
