@@ -106,9 +106,9 @@ function findMedia(box, way) {
     if (_way === 'stories' && event.target.className === '_v88d1') {
 
       var _current_target = document.querySelector('._o95x1').previousSibling;
+      _parent = _current_target.parentNode;
 
-      if (_current_target.querySelector('video')) {
-        _parent = _current_target;
+      if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
         _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
@@ -117,8 +117,7 @@ function findMedia(box, way) {
         return false;
       }
 
-      if (_current_target.querySelector('img')) {
-        _parent = _current_target;
+      if (_parent.querySelector('img')) {
         _url = _parent.querySelector('img').src;
         _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
 
