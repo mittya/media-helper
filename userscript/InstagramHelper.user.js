@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.8
+// @version            1.8.9
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -46,7 +46,10 @@
   };
 
   var GM_download_extra_video = function(src, title) {
-    fetch(src).then(function(res) {
+    window.open(src);
+
+    // 存储视频方法不稳定
+    /* fetch(src).then(function(res) {
 
       res.blob().then(function(blob) {
         var _link = document.createElement('a');
@@ -61,7 +64,7 @@
         document.body.removeChild(_link);
       });
 
-    });
+    }); */
   };
 
   var GM_addStyle_extra = function(css) {
@@ -272,7 +275,6 @@
         } else {
           // Firefox
           if (_title.indexOf('.mp4') >= 0) {
-            // window.open(_url);
             GM_download_extra_video(_url, _filename);
           } else {
             GM_download_extra(_url, _filename);
