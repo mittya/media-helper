@@ -54,7 +54,7 @@ if (window.location.pathname === '/') {
 
   // TODO: remove setTimeout
   setTimeout(function() {
-    var _box_story = document.querySelector('#react-root > section div._ni05h');
+    var _box_story = document.querySelector('#react-root > section div.yS4wN');
 
     if (_box_story) {
       findMedia(_box_story, 'stories');
@@ -70,8 +70,8 @@ function findMedia(box, way) {
 
   _box.addEventListener('mouseover', function(event) {
 
-    // img class: _2di5p
-    if (event.target.className === '_2di5p') {
+    // img class: FFVAD
+    if (event.target.className === 'FFVAD') {
 
       // disabled on the thumbnail page
       if (event.target.width > 300) {
@@ -79,8 +79,9 @@ function findMedia(box, way) {
         _url = event.target.src;
         _username = '';
 
-        if (_parent.parents('article')[0].querySelector('._2g7d5')) {
-          _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+        // title class: FPmhX
+        if (_parent.parents('article')[0].querySelector('.FPmhX')) {
+          _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
         }
 
         addBtn(_parent, _url, _username);
@@ -88,29 +89,32 @@ function findMedia(box, way) {
 
     }
 
-    // video parents class: _7thjo
-    // video class: _l6uaz
-    if (event.target.className === '_7thjo') {
+    // video parents class: OAXCp
+    // video class: tWeCl
+    if (event.target.className === 'QvAa1') {
       _parent = event.target.parentNode;
-      _url = _parent.querySelector('._l6uaz').src;
+      _url = _parent.querySelector('.tWeCl').src;
       _username = '';
-      if (_parent.parents('article')[0].querySelector('._2g7d5')) {
-        _username = _parent.parents('article')[0].querySelector('._2g7d5').title;
+
+      // title class: FPmhX
+      if (_parent.parents('article')[0].querySelector('.FPmhX')) {
+        _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
       }
 
       addBtn(_parent, _url, _username);
     }
 
     // Stories Video & Picture
-    // when autoplay videos disabled, user click the '._o95x1 > ._v88d1' cover to play the video.
-    if (_way === 'stories' && event.target.className === '_v88d1') {
-
-      var _current_target = document.querySelector('._o95x1').previousSibling;
+    // #react-root > div > div > section._8XqED
+    // z6Odz: cover box (when autoplay videos disabled, user click the cover box to play the video)
+    // Debug Stories: click more button stop auto video
+    if (_way === 'stories' && event.target.className.indexOf('_8XqED') >= 0) {
+      var _current_target = document.querySelector('.z6Odz').previousSibling;
       _parent = _current_target.parentNode;
 
       if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
-        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
 
@@ -119,7 +123,7 @@ function findMedia(box, way) {
 
       if (_parent.querySelector('img')) {
         _url = _parent.querySelector('img').src;
-        _username = _parent.parents('section')[0].querySelector('._2g7d5').title;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
 
@@ -141,6 +145,7 @@ function addBtn(parent, url, username) {
   }
 
   var _btn = document.createElement('button');
+  _btn.type = 'button';
 
   if (window.location.pathname.match('/stories/')) {
     _btn.className = 'downloadBtn inStories';
