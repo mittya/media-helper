@@ -1,3 +1,6 @@
+/*
+  Common function
+*/
 Element.prototype.parents = function(selector) {
   // Vanilla JS jQuery.parents() realisation
   // https://gist.github.com/ziggi/2f15832b57398649ee9b
@@ -23,17 +26,18 @@ Element.prototype.parents = function(selector) {
 /*
   Main
 */
+/*  Home page */
 if (window.location.pathname === '/') {
-  //  Home page
   var _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
 
   // Logged in
   if (_box_home) {
     findMedia(_box_home);
   }
-} else if (window.location.pathname.match('/p/')) {
-  // Detail page
+}
 
+/*  Detail page */
+if (window.location.pathname.match('/p/')) {
   var _box_detail = '';
 
   setTimeout(function() {
@@ -48,11 +52,10 @@ if (window.location.pathname === '/') {
       findMedia(_box_detail);
     }
   }, 1000); // TODO: 初次点击缩略图不能捕捉 dialog，这里临时用 setTimeout 修复
+}
 
-} else if (window.location.pathname.match('/stories/')) {
-  // Stories page
-
-  // TODO: remove setTimeout
+/*  Stories page */
+if (window.location.pathname.match('/stories/')) {
   setTimeout(function() {
     var _box_story = document.querySelector('#react-root > section div.yS4wN');
 
@@ -60,7 +63,6 @@ if (window.location.pathname === '/') {
       findMedia(_box_story, 'stories');
     }
   }, 50);
-
 }
 
 
@@ -70,7 +72,11 @@ function findMedia(box, way) {
 
   _box.addEventListener('mouseover', function(event) {
 
-    // img class: FFVAD
+    /*
+      Picture
+
+      img class: FFVAD
+    */
     if (event.target.className === 'FFVAD') {
 
       // disabled on the thumbnail page
@@ -89,8 +95,12 @@ function findMedia(box, way) {
 
     }
 
-    // video parents class: OAXCp
-    // video class: tWeCl
+    /*
+      Video
+
+      video parents class: OAXCp
+      video class: tWeCl
+    */
     if (event.target.className === 'QvAa1') {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('.tWeCl').src;
@@ -104,16 +114,22 @@ function findMedia(box, way) {
       addBtn(_parent, _url, _username);
     }
 
-    // Stories Video & Picture
-    // #react-root > div > div > section._8XqED
-    // z6Odz: cover box (when autoplay videos disabled, user click the cover box to play the video)
-    // Debug Stories: click more button stop auto video
-    if (_way === 'stories' && event.target.className.indexOf('_8XqED') >= 0) {
+    /*
+      Stories Picture & Video
+
+      _8XqED: #react-root > div > div > section._8XqED
+      z6Odz: cover box (when autoplay videos disable, user click the cover box to play the video)
+
+      Debug: click more button stop auto video
+    */
+    if (event.target.className.indexOf('_8XqED') >= 0 && _way === 'stories') {
+
       var _current_target = document.querySelector('.z6Odz').previousSibling;
       _parent = _current_target.parentNode;
 
-      if (_parent.querySelector('video')) {
-        _url = _parent.querySelector('video > source').src;
+      // Stories Picture
+      if (_parent.querySelector('img')) {
+        _url = _parent.querySelector('img').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
@@ -121,8 +137,9 @@ function findMedia(box, way) {
         return false;
       }
 
-      if (_parent.querySelector('img')) {
-        _url = _parent.querySelector('img').src;
+      // Stories Video
+      if (_parent.querySelector('video')) {
+        _url = _parent.querySelector('video > source').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);

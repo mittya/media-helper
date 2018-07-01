@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.10
+// @version            1.8.12
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -18,6 +18,30 @@
 
 (function() {
   'use strict';
+
+  /*
+    Common function
+  */
+  Element.prototype.parents = function(selector) {
+    // Vanilla JS jQuery.parents() realisation
+    // https://gist.github.com/ziggi/2f15832b57398649ee9b
+
+    var elements = [];
+    var elem = this;
+    var ishaveselector = selector !== undefined;
+
+    while ((elem = elem.parentElement) !== null) {
+      if (elem.nodeType !== Node.ELEMENT_NODE) {
+        continue;
+      }
+
+      if (!ishaveselector || elem.matches(selector)) {
+        elements.push(elem);
+      }
+    }
+
+    return elements;
+  };
 
   var GM_download_extra = function(src, title) {
     var img = new Image();
@@ -100,27 +124,10 @@
     GM_addStyle_extra(ig_helper_style);
   }
 
-  Element.prototype.parents = function(selector) {
-    // Vanilla JS jQuery.parents() realisation
-    // https://gist.github.com/ziggi/2f15832b57398649ee9b
 
-    var elements = [];
-    var elem = this;
-    var ishaveselector = selector !== undefined;
-
-    while ((elem = elem.parentElement) !== null) {
-      if (elem.nodeType !== Node.ELEMENT_NODE) {
-        continue;
-      }
-
-      if (!ishaveselector || elem.matches(selector)) {
-        elements.push(elem);
-      }
-    }
-
-    return elements;
-  };
-
+  /*
+    Main
+  */
   var observer = new MutationObserver(init);
   var config = {
     'childList': true,
@@ -129,29 +136,38 @@
   observer.observe(document.body, config);
 
 
-  /*
-      Main
-  */
-
   function init() {
+
+    /*  Home page */
     if (window.location.pathname === '/') {
-      //  Home page
-      var _box_home = document.querySelector('#react-root > section > main > section > div');
+      var _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
+
+      // Logged in
       if (_box_home) {
         findMedia(_box_home);
       }
-    } else if (window.location.pathname.match('/p/')) {
-      // Detail page
+    }
+
+    /*  Detail page */
+    if (window.location.pathname.match('/p/')) {
       var _box_detail = '';
-      if (document.querySelector('div[role="dialog"]')) {
-        _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
-      } else {
-        _box_detail = document.querySelector('#react-root > section > main article');
-      }
-      findMedia(_box_detail);
-    } else if (window.location.pathname.match('/stories/')) {
-      // Stories
-      // TODO: remove setTimeout
+
+      setTimeout(function() {
+        // first click is absolute，second is dialog
+        if (document.querySelector('div[role="dialog"]')) {
+          // djalog
+          _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+          findMedia(_box_detail);
+        } else {
+          // absolute
+          _box_detail = document.querySelector('#react-root > section > main article');
+          findMedia(_box_detail);
+        }
+      }, 1000); // TODO: 初次点击缩略图不能捕捉 dialog，这里临时用 setTimeout 修复
+    }
+
+    /*  Stories page */
+    if (window.location.pathname.match('/stories/')) {
       setTimeout(function() {
         var _box_story = document.querySelector('#react-root > section div.yS4wN');
 
@@ -159,8 +175,8 @@
           findMedia(_box_story, 'stories');
         }
       }, 50);
-
     }
+
   }
 
   function findMedia(box, way) {
@@ -170,13 +186,18 @@
     _box.addEventListener('mouseover', function(event) {
       event.stopPropagation();
 
-      // Picture
+      /*
+        Picture
+
+        img class: FFVAD
+      */
       if (event.target.className === 'FFVAD') {
         _parent = event.target.parentNode;
         _url = event.target.src;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _username = '';
 
+        // title class: FPmhX
         if (_parent.parents('article')[0].querySelector('.FPmhX')) {
           // TODO: 此内容不应在缩略图页面出现，但不明原因出现了。暂时做判断，如果在缩略图页面时不下载图片。同时避免报错。
           _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
@@ -184,7 +205,12 @@
         }
       }
 
-      // Video
+      /*
+        Video
+
+        video parents class: OAXCp
+        video class: tWeCl
+      */
       if (event.target.className === 'QvAa1') {
         _parent = event.target.parentNode;
         _url = _parent.querySelector('.tWeCl').src;
@@ -194,14 +220,22 @@
         addBtn(_parent, _url, _username, _title);
       }
 
-      // Stories Video & Picture
-      if (_way === 'stories' && event.target.className.indexOf('_8XqED') >= 0) {
+      /*
+        Stories Picture & Video
+
+        _8XqED: #react-root > div > div > section._8XqED
+        z6Odz: cover box (when autoplay videos disable, user click the cover box to play the video)
+
+        Debug: click more button stop auto video
+      */
+      if (event.target.className.indexOf('_8XqED') >= 0 && _way === 'stories') {
         var _current_target = document.querySelector('.z6Odz').previousSibling;
         _parent = _current_target.parentNode;
 
-        if (_parent.querySelector('video')) {
-          _url = _parent.querySelector('video > source').src;
-          _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
+        // Stories Picture
+        if (_parent.querySelector('img')) {
+          _url = _parent.querySelector('img').src;
+          _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
           addBtn(_parent, _url, _username, _title);
@@ -209,9 +243,10 @@
           return false;
         }
 
-        if (_parent.querySelector('img')) {
-          _url = _parent.querySelector('img').src;
-          _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
+        // Stories Video
+        if (_parent.querySelector('video')) {
+          _url = _parent.querySelector('video > source').src;
+          _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
           addBtn(_parent, _url, _username, _title);
