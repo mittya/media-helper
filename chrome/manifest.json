@@ -4,7 +4,7 @@
 
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.8.12",
+  "version": "1.8.13",
 
   "browser_action": {
     "default_icon": {
@@ -27,7 +27,7 @@
     {
       "js": ["script.js"],
       "css": ["style.css"],
-      "matches": ["https://www.instagram.com/*"]
+      "matches": ["*://*.instagram.com/*"]
     }
   ],
 

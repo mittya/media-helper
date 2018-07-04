@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.12
+// @version            1.8.13
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -194,6 +194,7 @@
       if (event.target.className === 'FFVAD') {
         _parent = event.target.parentNode;
         _url = event.target.src;
+        _url = _url.substring(0, _url.indexOf('?'));
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _username = '';
 
@@ -235,6 +236,7 @@
         // Stories Picture
         if (_parent.querySelector('img')) {
           _url = _parent.querySelector('img').src;
+          _url = _url.substring(0, _url.indexOf('?'));
           _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
