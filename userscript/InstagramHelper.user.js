@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.13
+// @version            1.8.14
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -233,11 +233,10 @@
         var _current_target = document.querySelector('.z6Odz').previousSibling;
         _parent = _current_target.parentNode;
 
-        // Stories Picture
-        if (_parent.querySelector('img')) {
-          _url = _parent.querySelector('img').src;
-          _url = _url.substring(0, _url.indexOf('?'));
-          _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
+        // Stories Video: video 'if' in front of the image
+        if (_parent.querySelector('video')) {
+          _url = _parent.querySelector('video > source').src;
+          _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
           addBtn(_parent, _url, _username, _title);
@@ -245,10 +244,11 @@
           return false;
         }
 
-        // Stories Video
-        if (_parent.querySelector('video')) {
-          _url = _parent.querySelector('video > source').src;
-          _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
+        // Stories Picture
+        if (_parent.querySelector('img')) {
+          _url = _parent.querySelector('img').src;
+          _url = _url.substring(0, _url.indexOf('?'));
+          _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
           addBtn(_parent, _url, _username, _title);

@@ -127,9 +127,10 @@ function findMedia(box, way) {
       var _current_target = document.querySelector('.z6Odz').previousSibling;
       _parent = _current_target.parentNode;
 
-      // Stories Picture
-      if (_parent.querySelector('img')) {
-        _url = _parent.querySelector('img').src;
+      // Stories Video: video 'if' in front of the image
+      if (_parent.querySelector('video')) {
+        console.log('video...');
+        _url = _parent.querySelector('video > source').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
@@ -137,9 +138,10 @@ function findMedia(box, way) {
         return false;
       }
 
-      // Stories Video
-      if (_parent.querySelector('video')) {
-        _url = _parent.querySelector('video > source').src;
+      // Stories Picture
+      if (_parent.querySelector('img')) {
+        console.log('img...');
+        _url = _parent.querySelector('img').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
