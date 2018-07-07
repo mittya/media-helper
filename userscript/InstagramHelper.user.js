@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.8.14
+// @version            1.9.0
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -152,18 +152,28 @@
     if (window.location.pathname.match('/p/')) {
       var _box_detail = '';
 
-      setTimeout(function() {
-        // first click is absolute，second is dialog
-        if (document.querySelector('div[role="dialog"]')) {
-          // djalog
-          _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
-          findMedia(_box_detail);
-        } else {
-          // absolute
-          _box_detail = document.querySelector('#react-root > section > main article');
-          findMedia(_box_detail);
-        }
-      }, 1000); // TODO: 初次点击缩略图不能捕捉 dialog，这里临时用 setTimeout 修复
+      /*
+        Absolute
+
+        box class: QBXjJ
+      */
+      if (document.querySelector('article.QBXjJ')) {
+        _box_detail = document.querySelector('article.QBXjJ');
+        findMedia(_box_detail);
+      }
+      /*
+        Dialog
+      */
+      else {
+        setTimeout(function() {
+          if (document.querySelector('div[role="dialog"]').querySelector('article')) {
+            _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+            findMedia(_box_detail);
+          } else {
+            console.error('IG Helper: Not found anything now. I will Fix it.');
+          }
+        }, 1000); // TODO: first click can't find dialog
+      }
     }
 
     /*  Stories page */

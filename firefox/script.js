@@ -40,18 +40,28 @@ if (window.location.pathname === '/') {
 if (window.location.pathname.match('/p/')) {
   var _box_detail = '';
 
-  setTimeout(function() {
-    // first click is absolute，second is dialog
-    if (document.querySelector('div[role="dialog"]')) {
-      // djalog
-      _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
-      findMedia(_box_detail);
-    } else {
-      // absolute
-      _box_detail = document.querySelector('#react-root > section > main article');
-      findMedia(_box_detail);
-    }
-  }, 1000); // TODO: 初次点击缩略图不能捕捉 dialog，这里临时用 setTimeout 修复
+  /*
+    Absolute
+
+    box class: QBXjJ
+  */
+  if (document.querySelector('article.QBXjJ')) {
+    _box_detail = document.querySelector('article.QBXjJ');
+    findMedia(_box_detail);
+  }
+  /*
+    Dialog
+  */
+  else {
+    setTimeout(function() {
+      if (document.querySelector('div[role="dialog"]').querySelector('article')) {
+        _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+        findMedia(_box_detail);
+      } else {
+        console.error('IG Helper: Not found anything now. I will Fix it.');
+      }
+    }, 1000); // TODO: first click can't find dialog
+  }
 }
 
 /*  Stories page */
@@ -129,7 +139,6 @@ function findMedia(box, way) {
 
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
-        console.log('video...');
         _url = _parent.querySelector('video > source').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
@@ -140,7 +149,6 @@ function findMedia(box, way) {
 
       // Stories Picture
       if (_parent.querySelector('img')) {
-        console.log('img...');
         _url = _parent.querySelector('img').src;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
