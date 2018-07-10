@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.9.1
+// @version            1.9.2
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -264,7 +264,7 @@
       if (event.target.className === 'FFVAD') {
         _parent = event.target.parentNode;
         _url = event.target.src;
-        _url = _url.substring(0, _url.indexOf('?'));
+        _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _username = '';
 
@@ -285,7 +285,7 @@
       if (event.target.className === 'QvAa1') {
         _parent = event.target.parentNode;
         _url = _parent.querySelector('.tWeCl').src;
-        _url = _url.substring(0, _url.indexOf('?'));
+        _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
         _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
 
@@ -307,7 +307,7 @@
         // Stories Video: video 'if' in front of the image
         if (_parent.querySelector('video')) {
           _url = _parent.querySelector('video > source').src;
-          _url = _url.substring(0, _url.indexOf('?'));
+          _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
           _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
@@ -319,7 +319,7 @@
         // Stories Picture
         if (_parent.querySelector('img')) {
           _url = _parent.querySelector('img').src;
-          _url = _url.substring(0, _url.indexOf('?'));
+          _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
           _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 

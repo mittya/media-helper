@@ -164,7 +164,7 @@ function findMedia(box, way) {
 
 function addBtn(parent, url, username) {
   var _parent = parent;
-  var _url = url.substring(0, url.indexOf('?'));
+  var _url = url.indexOf('?') >= 0 ? url.substring(0, url.indexOf('?')) : url;
   var _filename = username + '_' + _url.substring(_url.lastIndexOf('/') + 1, _url.length);
 
   if (_parent.querySelector('.downloadBtn')) {
