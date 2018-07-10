@@ -17,3 +17,5 @@
 ## Donate
 
 https://paypal.me/mittya/1
+
+Thank you for your donation :sparkles:
