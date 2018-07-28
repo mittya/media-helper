@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.9.2
+// @version            1.9.3
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -279,10 +279,10 @@
       /*
         Video
 
-        video parents class: OAXCp
         video class: tWeCl
+        video play button class: QvAa1
       */
-      if (event.target.className === 'QvAa1') {
+      if (event.target.className.indexOf('QvAa1') >= 0) {
         _parent = event.target.parentNode;
         _url = _parent.querySelector('.tWeCl').src;
         _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;

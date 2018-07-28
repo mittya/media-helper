@@ -108,10 +108,10 @@ function findMedia(box, way) {
     /*
       Video
 
-      video parents class: OAXCp
       video class: tWeCl
+      video play button class: QvAa1
     */
-    if (event.target.className === 'QvAa1') {
+    if (event.target.className.indexOf('QvAa1') >= 0) {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('.tWeCl').src;
       _username = '';
