@@ -135,7 +135,7 @@ function findMedia(box, way) {
     if (event.target.className.indexOf('_8XqED') >= 0 && _way === 'stories') {
 
       var _current_target = document.querySelector('.z6Odz').previousSibling;
-      _parent = _current_target.parentNode;
+      _parent = _current_target.parentNode.parentNode;
 
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
@@ -192,4 +192,13 @@ function addBtn(parent, url, username) {
   }, false);
 
   _parent.appendChild(_btn);
+
+  // Show stories btn
+  if (document.querySelector('.z6Odz')) {
+    document.querySelector('.z6Odz').addEventListener('mouseover', function(event) {
+      event.stopPropagation();
+
+      document.querySelector('.downloadBtn').style.opacity = '1';
+    }, false);
+  }
 }

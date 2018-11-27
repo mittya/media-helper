@@ -41,11 +41,11 @@
 /*
   .KL4Bh: IMG parent
   .OAXCp: VIDEO parent
-  .qbCDp Stories parent
+  .qbCDp: Stories prev
  */
 .KL4Bh:hover .downloadBtn,
 .OAXCp:hover .downloadBtn,
-.qbCDp:hover .downloadBtn {
+.qbCDp:hover ~ .downloadBtn {
   opacity: 1;
 }
 
