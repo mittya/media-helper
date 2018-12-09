@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.9.4
+// @version            1.9.5
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -226,11 +226,11 @@
       */
       else {
         setTimeout(function() {
-          if (document.querySelector('div[role="dialog"]').querySelector('article')) {
-            _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
-            findMedia(_box_detail);
-          } else {
-            console.error('IG Helper: Not found anything now. I will Fix it.');
+          if (document.querySelector('div[role="dialog"]')) {
+            if (document.querySelector('div[role="dialog"]').querySelector('article')) {
+              _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+              findMedia(_box_detail);
+            }
           }
         }, 1000); // TODO: first click can't find dialog
       }
@@ -264,7 +264,6 @@
       if (event.target.className === 'FFVAD') {
         _parent = event.target.parentNode;
         _url = event.target.src;
-        _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _username = '';
 
@@ -285,7 +284,6 @@
       if (event.target.className.indexOf('QvAa1') >= 0) {
         _parent = event.target.parentNode;
         _url = _parent.querySelector('.tWeCl').src;
-        _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
         _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
 
@@ -307,7 +305,6 @@
         // Stories Video: video 'if' in front of the image
         if (_parent.querySelector('video')) {
           _url = _parent.querySelector('video > source').src;
-          _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
           _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
@@ -319,7 +316,6 @@
         // Stories Picture
         if (_parent.querySelector('img')) {
           _url = _parent.querySelector('img').src;
-          _url = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
           _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
           _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
@@ -337,9 +333,11 @@
 
     if (!parent.querySelector('.downloadBtn')) {
       var _parent = parent;
-      var _url = url.replace(/\?ig_cache_key=[a-zA-Z0-9%.]+/, '');
+      var _url = url;
+      var _url_param = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+      _url_param = _url_param.replace(/\?ig_cache_key=[a-zA-Z0-9%.]+/, '');
       var _title = title[0];
-      var _filename = username + '_' + _url.substring(_url.lastIndexOf('/') + 1, _url.length);
+      var _filename = username + '_' + _url_param.substring(_url_param.lastIndexOf('/') + 1, _url_param.length);
       var _btn = document.createElement('button');
       var _ua = navigator.userAgent.toLowerCase();
 
