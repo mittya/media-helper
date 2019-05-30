@@ -3,7 +3,7 @@
 
   "name": "IG Helper",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.9.5",
+  "version": "1.9.7",
 
   "browser_action": {
     "default_icon": {

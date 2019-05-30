@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name               IG Helper: download Instagram pic & vids
 // @name:zh-CN         IG Helper: 下载 Instagram 图片和视频
-// @version            1.9.5
+// @version            1.9.7
 // @namespace          InstagramHelper
 // @homepage           https://github.com/mittya/instagram-helper
 // @description        Easily download Instagram pictures and videos.
@@ -294,12 +294,12 @@
         Stories Picture & Video
 
         _8XqED: #react-root > div > div > section._8XqED
-        z6Odz: cover box (when autoplay videos disable, user click the cover box to play the video)
+        z6Odz parent: cover box (when autoplay videos disable, user click the cover box to play the video)
 
         Debug: click more button stop auto video
       */
       if (event.target.className.indexOf('_8XqED') >= 0 && _way === 'stories') {
-        var _current_target = document.querySelector('.z6Odz').previousSibling;
+        var _current_target = document.querySelector('.z6Odz').parentNode;
         _parent = _current_target.parentNode.parentNode;
 
         // Stories Video: video 'if' in front of the image
