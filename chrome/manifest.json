@@ -4,7 +4,7 @@
 
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.9.7",
+  "version": "1.10.0",
 
   "browser_action": {
     "default_icon": {
@@ -34,7 +34,13 @@
   "permissions": [
     "tabs",
     "downloads",
+    "storage",
     "http://www.instagram.com/*",
     "https://www.instagram.com/*"
-  ]
+  ],
+
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  }
 }

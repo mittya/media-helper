@@ -192,14 +192,23 @@ function addBtn(parent, url, username) {
     });
   }, false);
 
-  _parent.appendChild(_btn);
+  // Check options(AlwaysHide)
+  chrome.storage.sync.get({
+    isHide: false
+  }, function(items) {
+    if (!items.isHide) {
+      _parent.appendChild(_btn);
+    }
+  });
 
   // Show stories btn
   if (document.querySelector('.z6Odz')) {
     document.querySelector('.z6Odz').addEventListener('mouseover', function(event) {
       event.stopPropagation();
 
-      document.querySelector('.downloadBtn').style.opacity = '1';
+      if (document.querySelector('.downloadBtn')) {
+        document.querySelector('.downloadBtn').style.opacity = '1';
+      }
     }, false);
   }
 }
