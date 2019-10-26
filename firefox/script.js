@@ -33,6 +33,11 @@ if (window.location.pathname === '/') {
   // Logged in
   if (_box_home) {
     findMedia(_box_home);
+  } else {
+    setTimeout(function() {
+      _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
+      findMedia(_box_home);
+    }, 1000);
   }
 }
 
@@ -53,14 +58,24 @@ if (window.location.pathname.match('/p/')) {
     Dialog
   */
   else {
-    setTimeout(function() {
+    if (document.querySelector('div[role="dialog"]')) {
+
       if (document.querySelector('div[role="dialog"]').querySelector('article')) {
         _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
         findMedia(_box_detail);
       } else {
-        console.error('IG Helper: Not found anything now. I will Fix it.');
+        var _config = { childList: true, subtree: true };
+        var _callback = function() {
+          _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+          findMedia(_box_detail);
+          _observer.disconnect();
+        };
+        var _observer = new MutationObserver(_callback);
+
+        _observer.observe(document.querySelector('div[role="dialog"]'), _config);
       }
-    }, 1000); // TODO: first click can't find dialog
+    }
+
   }
 }
 
@@ -109,9 +124,9 @@ function findMedia(box, way) {
       Video
 
       video class: tWeCl
-      video play button class: QvAa1
+      video play button class: fXIG0
     */
-    if (event.target.className.indexOf('QvAa1') >= 0) {
+    if (event.target.className.indexOf('fXIG0') >= 0) {
       _parent = event.target.parentNode;
       _url = _parent.querySelector('.tWeCl').src;
       _username = '';
@@ -193,7 +208,9 @@ function addBtn(parent, url, username) {
   }, false);
 
   // Check options(AlwaysHide)
-  browser.storage.sync.get('isHide').then(function(items) {
+  browser.storage.sync.get({
+    isHide: false
+  }, function(items) {
     if (!items.isHide) {
       _parent.appendChild(_btn);
     }

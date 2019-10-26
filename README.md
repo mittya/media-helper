@@ -9,8 +9,6 @@
 
 + [Firefox](https://addons.mozilla.org/firefox/addon/instagram-helper) (version >= 48)
 
-+ ~~[UserScript](https://greasyfork.org/scripts/22660-ig-helper-download-instagram-pic-vids) (Tampermonkey / Violentmonkey / Greasemonkey)~~
-
 
 ## Donate
 
