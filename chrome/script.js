@@ -140,6 +140,22 @@ function findMedia(box, way) {
     }
 
     /*
+      IG TV
+    */
+    if (event.target.className.indexOf('tWeCl') >= 0) {
+      _parent = event.target.parentNode;
+      _url = _parent.querySelector('.tWeCl').src;
+      _username = '';
+
+      // title class: FPmhX
+      if (_parent.parents('article')[0].querySelector('.FPmhX')) {
+        _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+      }
+
+      addBtn(_parent, _url, _username);
+    }
+
+    /*
       Stories Picture & Video
 
       _8XqED: #react-root > div > div > section._8XqED
