@@ -1,3 +1,5 @@
+:exclamation: These days ig updated the code for some users, I will wait for all users to get an update to fix it.
+
 # IG Helper
 
 > Easily download Instagram pictures and videos ([preview](screenshots))
