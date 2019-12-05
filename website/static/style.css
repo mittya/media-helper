@@ -44,10 +44,16 @@ body {
   border-radius: 12px;
   font-weight: 400;
   transition: all .3s ease;
+
+  display: none;
 }
 
 .title a:hover {
   opacity: .8;
+}
+
+.qa {
+  padding-top: 20px;
 }
 
 @media (max-width: 600px) {

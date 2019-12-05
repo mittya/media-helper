@@ -1,4 +1,5 @@
-:exclamation: These days ig updated the code for some users, I will wait for all users to get an update to fix it.
+These days IG updated the code for some beta users, you may not be able to download video posts.  
+
 
 # IG Helper
 
@@ -7,13 +8,5 @@
 
 ## Download
 
-+ [Chrome](https://chrome.google.com/webstore/detail/ig-helper-download-instag/albdnahmanonkmhoamgfjbjgbjabbiid)
-
-+ [Firefox](https://addons.mozilla.org/firefox/addon/instagram-helper) (version >= 48)
-
-
-## Donate
-
-https://paypal.me/mittya
-
-Thank you for your donation :sparkles:
+- [Chrome](https://chrome.google.com/webstore/detail/ig-helper-download-instag/albdnahmanonkmhoamgfjbjgbjabbiid)
+- [Firefox](https://addons.mozilla.org/firefox/addon/instagram-helper)
