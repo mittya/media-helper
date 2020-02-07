@@ -8,9 +8,9 @@
     }
   },
 
-  "name": "IG Helper",
+  "name": "Media Helper",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.12.0",
+  "version": "1.13.0",
 
   "browser_action": {
     "default_icon": {

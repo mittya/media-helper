@@ -1,7 +1,4 @@
-These days IG updated the code for some beta users, you may not be able to download video posts.  
-
-
-# IG Helper
+# Media Helper
 
 > Easily download Instagram pictures and videos ([preview](screenshots))
 
