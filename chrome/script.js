@@ -110,9 +110,9 @@ function findMedia(box, way) {
         _url = event.target.src;
         _username = '';
 
-        // title class: FPmhX
-        if (_parent.parents('article')[0].querySelector('.FPmhX')) {
-          _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+        // title class: sqdOP
+        if (_parent.parents('article')[0].querySelector('.sqdOP')) {
+          _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
         }
 
         addBtn(_parent, _url, _username);
@@ -131,9 +131,9 @@ function findMedia(box, way) {
       _url = _parent.querySelector('.tWeCl').src;
       _username = '';
 
-      // title class: FPmhX
-      if (_parent.parents('article')[0].querySelector('.FPmhX')) {
-        _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+      // title class: sqdOP
+      if (_parent.parents('article')[0].querySelector('.sqdOP')) {
+        _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
       }
 
       addBtn(_parent, _url, _username);
@@ -147,9 +147,9 @@ function findMedia(box, way) {
       _url = _parent.querySelector('.tWeCl').src;
       _username = '';
 
-      // title class: FPmhX
-      if (_parent.parents('article')[0].querySelector('.FPmhX')) {
-        _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+      // title class: sqdOP
+      if (_parent.parents('article')[0].querySelector('.sqdOP')) {
+        _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
       }
 
       addBtn(_parent, _url, _username);
@@ -171,7 +171,7 @@ function findMedia(box, way) {
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').text;
 
         addBtn(_parent, _url, _username);
 
@@ -181,7 +181,7 @@ function findMedia(box, way) {
       // Stories Picture
       if (_parent.querySelector('img')) {
         _url = _parent.querySelector('img').src;
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').text;
 
         addBtn(_parent, _url, _username);
 
