@@ -42,7 +42,7 @@ if (window.location.pathname === '/') {
 }
 
 /*  Detail page */
-if (window.location.pathname.match('/p/')) {
+if (window.location.pathname.match('/p/') || window.location.pathname.match('/tv/')) {
   var _box_detail = '';
 
   /*
@@ -171,7 +171,7 @@ function findMedia(box, way) {
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').text;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
 
@@ -181,7 +181,7 @@ function findMedia(box, way) {
       // Stories Picture
       if (_parent.querySelector('img')) {
         _url = _parent.querySelector('img').src;
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').text;
+        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
 
