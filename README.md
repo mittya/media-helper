@@ -10,5 +10,5 @@ Renamed due to Instagram trademark issues.
 
 ## Download
 
-- [Chrome](https://chrome.google.com/webstore/detail/ig-helper-download-instag/albdnahmanonkmhoamgfjbjgbjabbiid)
+- [Chrome](https://chrome.google.com/webstore/detail/media-helper/albdnahmanonkmhoamgfjbjgbjabbiid)
 - [Firefox](https://addons.mozilla.org/firefox/addon/media-helper)

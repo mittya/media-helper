@@ -28,14 +28,14 @@ Element.prototype.parents = function(selector) {
 */
 /*  Home page */
 if (window.location.pathname === '/') {
-  var _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
+  var _box_home = document.querySelector('#react-root > section > main > section');
 
   // Logged in
   if (_box_home) {
     findMedia(_box_home);
   } else {
     setTimeout(function() {
-      _box_home = document.querySelector('#react-root > section > main > section > div > div > div');
+      _box_home = document.querySelector('#react-root > section > main > section');
       findMedia(_box_home);
     }, 1000);
   }
