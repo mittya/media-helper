@@ -216,7 +216,7 @@ function addBtn(parent, url, username) {
     event.stopPropagation();
 
     // Download
-    chrome.runtime.sendMessage({
+    browser.runtime.sendMessage({
       msg: 'DL',
       url: _url,
       filename: _filename
