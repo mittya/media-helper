@@ -82,7 +82,7 @@ if (window.location.pathname.match('/p/') || window.location.pathname.match('/tv
 /*  Stories page */
 if (window.location.pathname.match('/stories/')) {
   setTimeout(function() {
-    var _box_story = document.querySelector('#react-root > section div.yS4wN');
+    var _box_story = document.querySelector('#react-root > section div.Cd8X1');
 
     if (_box_story) {
       findMedia(_box_story, 'stories');
@@ -158,14 +158,15 @@ function findMedia(box, way) {
     /*
       Stories Picture & Video
 
-      _8XqED: #react-root > div > div > section._8XqED
-      z6Odz parent: cover box (when autoplay videos disable, user click the cover box to play the video)
+      szopg: #react-root > div > div > section.szopg
+      B20bj parent: cover box (when autoplay videos disable, user click the cover box to play the video)
 
       Debug: click more button stop auto video
     */
-    if (event.target.className.indexOf('_8XqED') >= 0 && _way === 'stories') {
 
-      var _current_target = document.querySelector('.z6Odz').parentNode;
+    if (event.target.className.indexOf('B20bj') >= 0 && _way === 'stories') {
+
+      var _current_target = document.querySelector('.B20bj').parentNode;
       _parent = _current_target.parentNode.parentNode;
 
       // Stories Video: video 'if' in front of the image
@@ -233,13 +234,13 @@ function addBtn(parent, url, username) {
   });
 
   // Show stories btn
-  if (document.querySelector('.z6Odz')) {
-    document.querySelector('.z6Odz').addEventListener('mouseover', function(event) {
-      event.stopPropagation();
+  // if (document.querySelector('.B20bj')) {
+  //   document.querySelector('.B20bj').addEventListener('mouseover', function(event) {
+  //     event.stopPropagation();
 
-      if (document.querySelector('.downloadBtn')) {
-        document.querySelector('.downloadBtn').style.opacity = '1';
-      }
-    }, false);
-  }
+  //     if (document.querySelector('.downloadBtn')) {
+  //       document.querySelector('.downloadBtn').style.opacity = '1';
+  //     }
+  //   }, false);
+  // }
 }
