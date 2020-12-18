@@ -194,23 +194,51 @@ function findMedia(box, way) {
 }
 
 function addBtn(parent, url, username) {
+  /* Bad Code */
+
   var _parent = parent;
   var _url = url;
   var _url_param = url.indexOf('?') >= 0 ? url.substring(0, url.indexOf('?')) : url;
   var _filename = username + '_' + _url_param.substring(_url_param.lastIndexOf('/') + 1, _url_param.length);
+  var _flag = true;
 
   if (_parent.querySelector('.downloadBtn')) {
-    _parent.removeChild(_parent.querySelector('.downloadBtn'));
+    if (_parent.querySelector('.downloadBtn').getAttribute('data-url')) {
+      _flag = false;
+    } else {
+      _parent.removeChild(_parent.querySelector('.downloadBtn'));
+    }
   }
 
   var _btn = document.createElement('button');
   _btn.type = 'button';
+  _btn.className = window.location.pathname.match('/stories/') ? 'downloadBtn inStories' : _btn.className = 'downloadBtn';
 
-  if (window.location.pathname.match('/stories/')) {
-    _btn.className = 'downloadBtn inStories';
-  } else {
-    _btn.className = 'downloadBtn';
+  // Video & No Button
+  if (_url.indexOf('blob') >= 0 && _flag) {
+    getBlobVideo(_parent, function(oUrl) {
+      _url = oUrl;
+
+      _url_param = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+      _filename = username + '_' + _url_param.substring(_url_param.lastIndexOf('/') + 1, _url_param.length);
+
+      _btn.setAttribute('data-url', _url);
+
+      _parent.appendChild(_btn);
+    });
   }
+
+  // Has Button
+  if (!_flag) {
+    _url = _parent.querySelector('.downloadBtn').getAttribute('data-url');
+    _url_param = _url.indexOf('?') >= 0 ? _url.substring(0, _url.indexOf('?')) : _url;
+    _filename = username + '_' + _url_param.substring(_url_param.lastIndexOf('/') + 1, _url_param.length);
+  } else {
+    setTimeout(function() {
+      _parent.appendChild(_btn);
+    }, 100);
+  }
+
 
   _btn.addEventListener('click', function(event) {
     event.stopPropagation();
@@ -222,24 +250,25 @@ function addBtn(parent, url, username) {
       filename: _filename
     });
   }, false);
+}
 
-  // Check options(AlwaysHide)
-  chrome.storage.sync.get({
-    isHide: false
-  }, function(items) {
-    if (!items.isHide) {
-      _parent.appendChild(_btn);
+function getBlobVideo(nodeParent, callback) {
+  var _parent = nodeParent;
+  var _poster = _parent.querySelector('video').getAttribute('poster').match(/\/([^\/?]*)\?/)[1];
+  var _wrap = nodeParent.parents('article')[0];
+  var _times = _wrap.querySelectorAll('time');
+  var _url = _times[_times.length - 1].parentNode.href;
+  var regx = new RegExp(`${_poster}.*?video_url":("[^"]*")`, 's');
+
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', _url, false);
+  xhr.addEventListener('load', function() {
+    if (this.status == 200) {
+      _url = this.responseText.match(regx)[1].replace(/\\u0026/g, '&');
+      _url = _url.substring(1, _url.length - 1);
+
+      callback(_url);
     }
   });
-
-  // Show stories btn
-  // if (document.querySelector('.B20bj')) {
-  //   document.querySelector('.B20bj').addEventListener('mouseover', function(event) {
-  //     event.stopPropagation();
-
-  //     if (document.querySelector('.downloadBtn')) {
-  //       document.querySelector('.downloadBtn').style.opacity = '1';
-  //     }
-  //   }, false);
-  // }
+  xhr.send(null);
 }

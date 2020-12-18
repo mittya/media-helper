@@ -31,7 +31,7 @@
 
 .downloadBtn.inStories {
   width: 28px;
-  top: 90px;
+  top: 74px;
   right: 22px;
   border-radius: 50%;
   font-size: 12px;
@@ -43,6 +43,10 @@
   .OAXCp: VIDEO parent
   .qbCDp: Stories parent
  */
+.qbCDp {
+  position: relative;
+}
+
 .KL4Bh:hover .downloadBtn,
 .OAXCp:hover .downloadBtn,
 .qbCDp:hover .downloadBtn {
