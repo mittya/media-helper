@@ -180,7 +180,7 @@ function findMedia(box, way) {
 
       // Stories Picture
       if (_parent.querySelector('img')) {
-        _url = _parent.querySelector('img').src;
+        _url = _parent.querySelector('img').currentSrc;
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
