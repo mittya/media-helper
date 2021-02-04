@@ -180,7 +180,10 @@ function findMedia(box, way) {
 
       // Stories Picture
       if (_parent.querySelector('img')) {
-        _url = _parent.querySelector('img').src;
+        // _url = _parent.querySelector('img').src; // Chrome worked well
+        var _tmp = _parent.querySelector('img').srcset.split(',')[0];
+        _tmp.substring(0, _tmp.indexOf(' '));
+        _url = _tmp.substring(0, _tmp.indexOf(' '));
         _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
 
         addBtn(_parent, _url, _username);
