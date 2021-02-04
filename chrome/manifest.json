@@ -4,7 +4,7 @@
 
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.17.1",
+  "version": "1.17.2",
 
   "browser_action": {
     "default_icon": {
