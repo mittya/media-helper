@@ -1,7 +1,6 @@
-.PHONY: ff, ch
+.PHONY: zip
 
-ff:
-	cd firefox && zip -r -X firefox.zip *
-
-ch:
-	cd chrome && zip -r -X chrome.zip *
+zip:
+	zip -r -X chrome.zip chrome/* && \
+	zip -r -X firefox.zip firefox/* && \
+	zip -r -X edge.zip chrome/*
