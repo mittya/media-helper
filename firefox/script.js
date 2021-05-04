@@ -123,12 +123,13 @@ function findMedia(box, way) {
     /*
       Video
 
-      video class: tWeCl
+      video class: tWeCl / Q9bIO
       video play button class: fXIG0
     */
     if (event.target.className.indexOf('fXIG0') >= 0) {
       _parent = event.target.parentNode;
-      _url = _parent.querySelector('.tWeCl').src;
+      _url = _parent.querySelector('.Q9bIO') ? _parent.querySelector('.Q9bIO').src
+                                             : _parent.querySelector('.tWeCl').src;
       _username = '';
 
       // title class: sqdOP
@@ -142,9 +143,10 @@ function findMedia(box, way) {
     /*
       IG TV
     */
-    if (event.target.className.indexOf('tWeCl') >= 0) {
+    if (event.target.className.indexOf('tWeCl') >= 0 || event.target.className.indexOf('Q9bIO') >= 0) {
       _parent = event.target.parentNode;
-      _url = _parent.querySelector('.tWeCl').src;
+      _url = _parent.querySelector('.Q9bIO') ? _parent.querySelector('.Q9bIO').src
+                                             : _parent.querySelector('.tWeCl').src;
       _username = '';
 
       // title class: sqdOP

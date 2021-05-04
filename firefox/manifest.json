@@ -4,18 +4,18 @@
   "browser_specific_settings": {
     "gecko": {
       "id": "{85603edc-044f-4391-9a95-a94682f449b4}",
-      "strict_min_version": "42.0"
+      "strict_min_version": "55.0"
     }
   },
 
-  "name": "Media Helper",
+  "name": "Media Helper for Instagram",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.17.2",
+  "version": "1.18.0",
 
   "browser_action": {
     "default_icon": {
-      "19": "icons/icon_512.png",
-      "38": "icons/icon_512.png"
+      "19": "icons/icon_19.png",
+      "38": "icons/icon_38.png"
     }
   },
 
@@ -33,7 +33,10 @@
     {
       "js": ["script.js"],
       "css": ["style.css"],
-      "matches": ["*://*.instagram.com/*"]
+      "matches": [
+        "*://*.instagram.com/*",
+        "*://*.cdninstagram.com/*"
+      ]
     }
   ],
 
@@ -41,12 +44,7 @@
     "tabs",
     "downloads",
     "storage",
-    "http://www.instagram.com/*",
-    "https://www.instagram.com/*"
-  ],
-
-  "options_ui": {
-    "page": "options.html",
-    "open_in_tab": true
-  }
+    "*://*.instagram.com/*",
+    "*://*.cdninstagram.com/*"
+  ]
 }

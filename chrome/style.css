@@ -39,8 +39,8 @@
 }
 
 /*
-  .KL4Bh: IMG parent
-  .OAXCp: VIDEO parent
+  .KL4Bh: Picture parent
+  .OAXCp / .E-66r: Video parent
   .qbCDp: Stories parent
  */
 .qbCDp {
@@ -48,13 +48,13 @@
 }
 
 .KL4Bh:hover .downloadBtn,
-.OAXCp:hover .downloadBtn,
+.OAXCp:hover .downloadBtn, .E-66r:hover .downloadBtn,
 .qbCDp:hover .downloadBtn {
   opacity: 1;
 }
 
 .KL4Bh:active .downloadBtn,
-.OAXCp:active .downloadBtn {
+.OAXCp:active .downloadBtn, .OAXCp:active .downloadBtn {
   opacity: .9;
 }
 

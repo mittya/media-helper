@@ -4,7 +4,7 @@
 
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.17.2",
+  "version": "1.18.0",
 
   "browser_action": {
     "default_icon": {
@@ -27,7 +27,10 @@
     {
       "js": ["script.js"],
       "css": ["style.css"],
-      "matches": ["*://*.instagram.com/*"]
+      "matches": [
+        "*://*.instagram.com/*",
+        "*://*.cdninstagram.com/*"
+      ]
     }
   ],
 
@@ -35,8 +38,8 @@
     "tabs",
     "downloads",
     "storage",
-    "http://www.instagram.com/*",
-    "https://www.instagram.com/*"
+    "*://*.instagram.com/*",
+    "*://*.cdninstagram.com/*"
   ],
 
   "options_ui": {

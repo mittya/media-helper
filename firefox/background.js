@@ -8,9 +8,21 @@ browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if ((request.msg).search('DL') != -1) {
-    browser.downloads.download({
-      url: request.url,
-      filename: request.filename
+
+    fetch(request.url).then(response => response.blob()).then(blob => {
+      var _url = window.URL.createObjectURL(blob);
+
+      browser.downloads.download({
+        url: _url,
+        filename: request.filename,
+        headers: [
+          {
+            name: 'Referer',
+            value: 'instagram.com'
+          }
+        ]
+      });
     });
+
   }
 });
