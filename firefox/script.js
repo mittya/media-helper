@@ -265,10 +265,22 @@ function getBlobVideo(nodeParent, callback) {
   var _url = _times[_times.length - 1].parentNode.href;
   var regx = new RegExp(`${_poster}.*?video_url":("[^"]*")`, 's');
 
-  fetch(_url).then(response => response.text()).then(restext => {
-    _url = restext.match(regx)[1].replace(/\\u0026/g, '&');
-    _url = _url.substring(1, _url.length - 1);
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', _url, false);
+  xhr.addEventListener('load', function() {
+    if (this.status == 200) {
+      _url = this.responseText.match(regx)[1].replace(/\\u0026/g, '&');
+      _url = _url.substring(1, _url.length - 1);
 
-    callback(_url);
+      callback(_url);
+    }
   });
+  xhr.send(null);
+
+  // fetch(_url).then(response => response.text()).then(restext => {
+  //   _url = restext.match(regx)[1].replace(/\\u0026/g, '&');
+  //   _url = _url.substring(1, _url.length - 1);
+
+  //   callback(_url);
+  // });
 }

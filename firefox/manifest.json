@@ -10,7 +10,7 @@
 
   "name": "Media Helper for Instagram",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.18.2",
+  "version": "1.18.3",
 
   "browser_action": {
     "default_icon": {
