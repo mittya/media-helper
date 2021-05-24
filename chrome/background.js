@@ -9,14 +9,19 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
   if ((request.msg).search('DL') != -1) {
 
-    fetch(request.url).then(response => response.blob()).then(blob => {
+    chrome.downloads.download({
+      url: request.url,
+      filename: request.filename
+    });
+
+    /* fetch(request.url).then(response => response.blob()).then(blob => {
       var _url = window.URL.createObjectURL(blob);
 
       chrome.downloads.download({
         url: _url,
         filename: request.filename
       });
-    });
+    }); */
 
   }
 });
