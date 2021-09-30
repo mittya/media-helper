@@ -111,8 +111,8 @@ function findMedia(box, way) {
         _username = '';
 
         // title class: sqdOP
-        if (_parent.parents('article')[0].querySelector('.sqdOP')) {
-          _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
+        if (_parent.parents('article')[0].querySelector('a.sqdOP')) {
+          _username = _parent.parents('article')[0].querySelector('a.sqdOP').text;
         }
 
         addBtn(_parent, _url, _username);
@@ -133,8 +133,8 @@ function findMedia(box, way) {
       _username = '';
 
       // title class: sqdOP
-      if (_parent.parents('article')[0].querySelector('.sqdOP')) {
-        _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
+      if (_parent.parents('article')[0].querySelector('a.sqdOP')) {
+        _username = _parent.parents('article')[0].querySelector('a.sqdOP').text;
       }
 
       addBtn(_parent, _url, _username);
@@ -150,8 +150,8 @@ function findMedia(box, way) {
       _username = '';
 
       // title class: sqdOP
-      if (_parent.parents('article')[0].querySelector('.sqdOP')) {
-        _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
+      if (_parent.parents('article')[0].querySelector('a.sqdOP')) {
+        _username = _parent.parents('article')[0].querySelector('a.sqdOP').text;
       }
 
       addBtn(_parent, _url, _username);
