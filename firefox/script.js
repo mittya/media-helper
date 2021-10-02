@@ -112,7 +112,7 @@ function findMedia(box, way) {
 
         // title class: sqdOP
         if (_parent.parents('article')[0].querySelector('a.sqdOP')) {
-          _username = _parent.parents('article')[0].querySelector('.sqdOP').text;
+          _username = _parent.parents('article')[0].querySelector('a.sqdOP').text;
         }
 
         addBtn(_parent, _url, _username);
