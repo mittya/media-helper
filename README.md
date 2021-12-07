@@ -17,3 +17,7 @@ A: No
 
 ### Q: Privacy?
 A: No server, No data is sent
+
+### ❗️ Warning
+Please don't use it too much, the operation is not allowed by IG.  
+Although this tool only simulates local storage of images, IG may be able to detect abnormal users in the near future, so please take care of this yourself if it causes your users to be abnormal.  
