@@ -82,7 +82,7 @@ if (window.location.pathname.match('/p/') || window.location.pathname.match('/tv
 /*  Stories page */
 if (window.location.pathname.match('/stories/')) {
   setTimeout(function() {
-    var _box_story = document.querySelector('#react-root > section div.Cd8X1');
+    var _box_story = document.querySelector('#react-root section > div.Cd8X1');
 
     if (_box_story) {
       findMedia(_box_story, 'stories');
