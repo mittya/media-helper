@@ -267,10 +267,10 @@
         _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
         _username = '';
 
-        // title class: FPmhX
-        if (_parent.parents('article')[0].querySelector('.FPmhX')) {
+        // title class: _1PU_r
+        if (_parent.parents('article')[0].querySelector('._1PU_r')) {
           // TODO: 此内容不应在缩略图页面出现，但不明原因出现了。暂时做判断，如果在缩略图页面时不下载图片。同时避免报错。
-          _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+          _username = _parent.parents('article')[0].querySelector('._1PU_r').title;
           addBtn(_parent, _url, _username, _title);
         }
       }
@@ -285,7 +285,7 @@
         _parent = event.target.parentNode;
         _url = _parent.querySelector('.tWeCl').src;
         _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
-        _username = _parent.parents('article')[0].querySelector('.FPmhX').title;
+        _username = _parent.parents('article')[0].querySelector('._1PU_r').title;
 
         addBtn(_parent, _url, _username, _title);
       }
@@ -306,7 +306,7 @@
         if (_parent.querySelector('video')) {
           _url = _parent.querySelector('video > source').src;
           _title = _url.match(/[a-zA-Z0-9_]+.mp4/g);
-          _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+          _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
           addBtn(_parent, _url, _username, _title);
 
@@ -317,7 +317,7 @@
         if (_parent.querySelector('img')) {
           _url = _parent.querySelector('img').src;
           _title = _url.match(/[a-zA-Z0-9_]+.jpg/g);
-          _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+          _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
           addBtn(_parent, _url, _username, _title);
 

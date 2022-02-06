@@ -173,7 +173,7 @@ function findMedia(box, way) {
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+        _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
         addBtn(_parent, _url, _username);
 
@@ -185,7 +185,7 @@ function findMedia(box, way) {
         var _tmp = _parent.querySelector('img').srcset.split(',')[0];
         _tmp.substring(0, _tmp.indexOf(' '));
         _url = _tmp.substring(0, _tmp.indexOf(' '));
-        _username = _parent.parents('section')[0].querySelector('.FPmhX').title;
+        _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
         addBtn(_parent, _url, _username);
 
