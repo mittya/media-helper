@@ -168,12 +168,12 @@ function findMedia(box, way) {
     if (event.target.className.indexOf('B20bj') >= 0 && _way === 'stories') {
 
       var _current_target = document.querySelector('.B20bj').parentNode;
-      _parent = _current_target.parentNode.parentNode;
+      _parent = _current_target.parents('.qbCDp')[0];
+      _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
         _url = _parent.querySelector('video > source').src;
-        _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
         addBtn(_parent, _url, _username);
 
@@ -185,7 +185,6 @@ function findMedia(box, way) {
         var _tmp = _parent.querySelector('img').srcset.split(',')[0];
         _tmp.substring(0, _tmp.indexOf(' '));
         _url = _tmp.substring(0, _tmp.indexOf(' '));
-        _username = _parent.parents('section')[0].querySelector('._1PU_r').title;
 
         addBtn(_parent, _url, _username);
 
