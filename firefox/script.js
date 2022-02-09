@@ -30,15 +30,17 @@ Element.prototype.parents = function(selector) {
 if (window.location.pathname === '/') {
   var _box_home = document.querySelector('#react-root section > main > section');
 
-  // Logged in
   if (_box_home) {
     findMedia(_box_home);
-  } else {
-    setTimeout(function() {
-      _box_home = document.querySelector('#react-root section > main > section');
-      findMedia(_box_home);
-    }, 1000);
   }
+
+  setTimeout(function() {
+    _box_home = document.querySelector('#react-root section > main > section');
+
+    if (_box_home) {
+      findMedia(_box_home);
+    }
+  }, 3000);
 }
 
 /*  Detail page */
@@ -262,24 +264,12 @@ function getBlobVideo(nodeParent, callback) {
   var _wrap = nodeParent.parents('article')[0];
   var _times = _wrap.querySelectorAll('time');
   var _url = _times[_times.length - 1].parentNode.href;
-  var regx = new RegExp(`${_poster}.*?video_url":("[^"]*")`, 's');
+  var regx = /\"video_versions\":\[.*?\]/g;
 
-  var xhr = new XMLHttpRequest();
-  xhr.open('GET', _url, false);
-  xhr.addEventListener('load', function() {
-    if (this.status == 200) {
-      _url = this.responseText.match(regx)[1].replace(/\\u0026/g, '&');
-      _url = _url.substring(1, _url.length - 1);
+  fetch(_url).then(response => response.text()).then(restext => {
+    let objStr = '{' + restext.match(regx)[0] + '}';
+    let obj = JSON.parse(objStr);
 
-      callback(_url);
-    }
+    callback(obj.video_versions[0].url.replace(/\\u0026/g, '&'));
   });
-  xhr.send(null);
-
-  // fetch(_url).then(response => response.text()).then(restext => {
-  //   _url = restext.match(regx)[1].replace(/\\u0026/g, '&');
-  //   _url = _url.substring(1, _url.length - 1);
-
-  //   callback(_url);
-  // });
 }
