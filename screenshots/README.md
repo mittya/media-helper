@@ -1,3 +1,0 @@
-# Screenshots
-
-![screenshot](screenshot.gif)

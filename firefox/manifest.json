@@ -10,7 +10,7 @@
 
   "name": "Media Helper for Instagram",
   "description": "Easily download Instagram pictures and videos.",
-  "version": "1.21.0",
+  "version": "1.23.0",
 
   "browser_action": {
     "default_icon": {
@@ -43,7 +43,6 @@
   "permissions": [
     "tabs",
     "downloads",
-    "storage",
     "*://*.instagram.com/*",
     "*://*.cdninstagram.com/*",
     "*://*.fbcdn.net/*"
