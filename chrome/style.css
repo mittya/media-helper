@@ -39,28 +39,27 @@
 }
 
 /*
-  .KL4Bh: Picture parent
-  .OAXCp / .Btbrr: Video parent
-  .qbCDp: Stories parent
+  ._aagv: Picture parent
+  ._aatn: Video parent
+  ._aa64: Stories parent
  */
-.qbCDp {
+._ac0b {
   position: relative;
 }
 
-.KL4Bh:hover .downloadBtn,
-.OAXCp:hover .downloadBtn, .Btbrr:hover .downloadBtn,
-.qbCDp:hover .downloadBtn {
+._aagv:hover .downloadBtn,
+._aatn:hover .downloadBtn,
+._ac0b:hover .downloadBtn {
   opacity: 1;
 }
 
-.KL4Bh:active .downloadBtn,
-.OAXCp:active .downloadBtn, .Btbrr:active .downloadBtn {
+._aagv:active .downloadBtn,
+._aatn:active .downloadBtn, {
   opacity: .9;
 }
 
 /* pic cover */
-._si7dy,
-._9AhH0 {
+._aagw {
   display: none !important;
 }
 
