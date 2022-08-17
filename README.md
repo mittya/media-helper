@@ -1,6 +1,6 @@
 # Media Helper for Instagram
 
-Easily download Instagram pictures and ~~videos~~.  
+Easily download Instagram pictures ~~and videos~~.  
 
 - [Chrome](https://chrome.google.com/webstore/detail/media-helper/albdnahmanonkmhoamgfjbjgbjabbiid)
 - [Firefox](https://addons.mozilla.org/firefox/addon/media-helper)
@@ -10,7 +10,7 @@ Easily download Instagram pictures and ~~videos~~.
 ## FAQ
 
 ### Q: Feedback Email
-A: mediahelper@outlook.com
+A: ~~mediahelper@outlook.com~~
 
 ### Q: For sale?
 A: No
