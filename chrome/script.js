@@ -28,14 +28,14 @@ Element.prototype.parents = function(selector) {
 */
 /*  Home page */
 if (window.location.pathname === '/') {
-  var _box_home = document.querySelector('body section > main > section');
+  var _box_home = document.querySelector('body section > main section');
 
   if (_box_home) {
     findMedia(_box_home);
   }
 
   setTimeout(function() {
-    _box_home = document.querySelector('body section > main > section');
+    _box_home = document.querySelector('body section > main section');
 
     if (_box_home) {
       findMedia(_box_home);
@@ -210,7 +210,7 @@ function addBtn(parent, url, username) {
 
   // Video & No Button
   if (_url.indexOf('blob') >= 0 && _flag) {
-    console.warn('Media Helper: Sorry, This version cannot be dowonload video.');
+    console.warn('Media Helper: Sorry, This version cannot dowonload videos.');
     return false;
 
     getBlobVideo(_parent, function(oUrl) {
