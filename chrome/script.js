@@ -165,7 +165,7 @@ function findMedia(box, way) {
 
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
-        _url = _parent.querySelector('video > source').src;
+        _url = _parent.querySelector('video').src;
 
         addBtn(_parent, _url, _username);
 
@@ -210,7 +210,7 @@ function addBtn(parent, url, username) {
 
   // Video & No Button
   if (_url.indexOf('blob') >= 0 && _flag) {
-    console.warn('Media Helper: Sorry, This version cannot dowonload videos.');
+    console.warn('Media Helper: Sorry, This version cannot download videos.');
     return false;
 
     getBlobVideo(_parent, function(oUrl) {
