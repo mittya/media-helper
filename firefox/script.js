@@ -120,9 +120,8 @@ function findMedia(box, way) {
         _url = event.target.src;
         _username = '';
 
-        // title class: _aap8
-        if (_parent.parents('article')[0].querySelector('span._aap8 a')) {
-          _username = _parent.parents('article')[0].querySelector('span._aap8 a').text;
+        if (_parent.parents('article')[0].querySelector('._aaqt a[role="link"]')) {
+          _username = _parent.parents('article')[0].querySelector('._aaqt a[role="link"]').text;
         }
 
         addBtn(_parent, _url, _username);
@@ -142,9 +141,8 @@ function findMedia(box, way) {
       _url = _parent.querySelector('._ab1d').src;
       _username = '';
 
-      // title class: _aap8
-      if (_parent.parents('article')[0].querySelector('span._aap8 a')) {
-        _username = _parent.parents('article')[0].querySelector('span._aap8 a').text;
+      if (_parent.parents('article')[0].querySelector('._aaqt a[role="link"]')) {
+        _username = _parent.parents('article')[0].querySelector('._aaqt a[role="link"]').text;
       }
 
       addBtn(_parent, _url, _username);
