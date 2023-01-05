@@ -159,7 +159,7 @@ function findMedia(box, way) {
     if (event.target.className === '_ac0y' && _way === 'stories') {
 
       var _parent = document.querySelector('._ac0y').parents('._ac0b')[0];
-      _username = _parent.querySelector('._ac0q').querySelector('a').text;
+      _username = _parent.querySelector('a._ac0s').text;
 
       // Stories Video: video 'if' in front of the image
       if (_parent.querySelector('video')) {
