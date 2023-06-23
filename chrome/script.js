@@ -70,34 +70,31 @@ if (window.location.pathname.match('/stories/')) {
 
 function detailBox() {
   /*
-    Absolute
-  */
-  if (document.querySelector('div[role="presentation"]')) {
-    _box_detail = document.querySelector('div[role="presentation"]');
-    findMedia(_box_detail);
-  }
-  /*
     Dialog
   */
-  else {
-    if (document.querySelector('div[role="dialog"]')) {
-
-      if (document.querySelector('div[role="dialog"]').querySelector('article')) {
+  if (document.querySelector('div[role="dialog"]')) {
+    if (document.querySelector('div[role="dialog"]').querySelector('article')) {
+      _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
+      findMedia(_box_detail);
+    } else {
+      var _config = { childList: true, subtree: true };
+      var _callback = function() {
         _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
         findMedia(_box_detail);
-      } else {
-        var _config = { childList: true, subtree: true };
-        var _callback = function() {
-          _box_detail = document.querySelector('div[role="dialog"]').querySelector('article');
-          findMedia(_box_detail);
-          _observer.disconnect();
-        };
-        var _observer = new MutationObserver(_callback);
+        _observer.disconnect();
+      };
+      var _observer = new MutationObserver(_callback);
 
-        _observer.observe(document.querySelector('div[role="dialog"]'), _config);
-      }
+      _observer.observe(document.querySelector('div[role="dialog"]'), _config);
     }
+  }
 
+  /*
+    Absolute
+  */
+  else {
+    _box_detail = document.querySelector('div[role="presentation"]');
+    findMedia(_box_detail);
   }
 }
 
