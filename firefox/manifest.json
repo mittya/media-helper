@@ -1,5 +1,5 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "browser_specific_settings": {
     "gecko": {
@@ -12,7 +12,7 @@
   "description": "Easily download Instagram pictures and videos.",
   "version": "1.27.5",
 
-  "browser_action": {
+  "action": {
     "default_icon": {
       "19": "icons/icon_19.png",
       "38": "icons/icon_38.png"
@@ -26,7 +26,7 @@
   },
 
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
 
   "content_scripts": [
@@ -43,6 +43,10 @@
   "permissions": [
     "tabs",
     "downloads",
+    "scripting"
+  ],
+
+  "host_permissions": [
     "*://*.instagram.com/*",
     "*://*.cdninstagram.com/*",
     "*://*.fbcdn.net/*"
