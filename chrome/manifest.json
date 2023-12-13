@@ -1,28 +1,24 @@
 {
   "manifest_version": 3,
   "default_locale": "en",
-
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.27.6",
-
+  "version": "1.28.0",
   "action": {
     "default_icon": {
       "19": "icons/icon_512.png",
       "38": "icons/icon_512.png"
     }
   },
-
   "icons": {
     "16": "icons/icon_512.png",
     "48": "icons/icon_512.png",
     "128": "icons/icon_512.png"
   },
-
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background.js",
+    "type": "module"
   },
-
   "content_scripts": [
     {
       "js": ["script.js"],
@@ -33,16 +29,13 @@
       ]
     }
   ],
-
   "permissions": [
     "tabs",
     "downloads",
     "scripting"
   ],
-
   "host_permissions": [
     "*://*.instagram.com/*",
-    "*://*.cdninstagram.com/*",
-    "*://*.fbcdn.net/*"
+    "*://*.cdninstagram.com/*"
   ]
 }

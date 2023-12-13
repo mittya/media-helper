@@ -118,7 +118,9 @@ function findMedia(box, way) {
         _username = '';
 
         articles = _parent.parents('article').concat(_parent.parents('main'));
-        if (articles[0].querySelector('._aaqt a[role="link"]')) {
+        if (articles[0].querySelector('.x1lliihq a[role="link"].notranslate')) {
+          _username = articles[0].querySelector('.x1lliihq a[role="link"].notranslate').text;
+        } else if (articles[0].querySelector('._aaqt a[role="link"]')) {
           _username = articles[0].querySelector('._aaqt a[role="link"]').text;
         }
 
