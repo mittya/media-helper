@@ -156,9 +156,9 @@ function findMedia(box, way) {
 
       Debug: click more button stop auto video
     */
-    if (event.target.className === '_ac0y' && _way === 'stories') {
+    if (event.target.className === 'x5yr21d x10l6tqk x17qophe x13vifvy xh8yej3' && _way === 'stories') {
 
-      var _parent = document.querySelector('._ac0y').parents('._ac0b')[0];
+      var _parent = document.querySelector('._ac0b');
       _username = _parent.querySelector('a._ac0s').text;
 
       // Stories Video: video 'if' in front of the image
