@@ -1,7 +1,7 @@
 browser.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
   if (changeInfo.status == 'complete') {
     if (tab.url.match('^https?://(www\.)?instagram.com*')) {
-      browser.scripting.executeScript({target: { tabId: tab.id }, files: ['script.js'] });
+      browser.tabs.executeScript(tab.id, { file: 'script.js' });
     }
   }
 });
