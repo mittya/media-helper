@@ -25,7 +25,8 @@
       "css": ["style.css"],
       "matches": [
         "*://*.instagram.com/*",
-        "*://*.cdninstagram.com/*"
+        "*://*.cdninstagram.com/*",
+        "*://*.fbcdn.net/*"
       ]
     }
   ],
@@ -36,6 +37,7 @@
   ],
   "host_permissions": [
     "*://*.instagram.com/*",
-    "*://*.cdninstagram.com/*"
+    "*://*.cdninstagram.com/*",
+    "*://*.fbcdn.net/*"
   ]
 }
