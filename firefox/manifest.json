@@ -29,7 +29,8 @@
       "css": ["style.css"],
       "matches": [
         "*://*.instagram.com/*",
-        "*://*.cdninstagram.com/*"
+        "*://*.cdninstagram.com/*",
+        "*://*.fbcdn.net/*"
       ]
     }
   ],
@@ -37,6 +38,7 @@
     "tabs",
     "downloads",
     "*://*.instagram.com/*",
-    "*://*.cdninstagram.com/*"
+    "*://*.cdninstagram.com/*",
+    "*://*.fbcdn.net/*"
   ]
 }
