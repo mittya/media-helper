@@ -3,7 +3,7 @@
   "default_locale": "en",
   "name": "__MSG_extName__",
   "description": "__MSG_extDesc__",
-  "version": "1.28.1",
+  "version": "1.28.2",
   "action": {
     "default_icon": {
       "19": "icons/icon_512.png",
